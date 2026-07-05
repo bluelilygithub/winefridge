@@ -1,0 +1,18 @@
+# WordPress sensitive files
+wp-config.php
+
+# Local development
+local-xdebuginfo.php
+.DS_Store
+
+# Uploads (large media files - usually not committed)
+wp-content/uploads/
+
+# Cache plugins
+wp-content/cache/
+
+# Node modules (if any theme uses them)
+node_modules/
+
+# Log files
+*.log
