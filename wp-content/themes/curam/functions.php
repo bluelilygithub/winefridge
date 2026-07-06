@@ -5,7 +5,7 @@
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'CURAM_VERSION', '1.0.3' );
+define( 'CURAM_VERSION', '1.0.4' );
 
 // Hide the WordPress admin bar on the front end.
 add_filter( 'show_admin_bar', '__return_false' );

@@ -16,3 +16,7 @@ node_modules/
 
 # Log files
 *.log
+
+# Duplicator backup plugin
+wp-content/backups-dup-lite/
+wp-content/plugins/duplicator/

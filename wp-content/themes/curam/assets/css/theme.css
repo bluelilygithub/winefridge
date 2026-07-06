@@ -230,6 +230,9 @@ img { max-width: 100%; height: auto; }
 .cu-footer ul { display: flex; flex-direction: column; gap: 0.75rem; list-style: none; margin: 0; padding: 0; }
 .cu-footer ul a { font-size: var(--fs-sm); color: var(--on-dark-soft); text-decoration: none; transition: var(--transition); }
 .cu-footer ul a:hover { color: var(--linen); }
+.cu-social { display: flex; gap: 1rem; margin-top: 1.5rem; }
+.cu-social-link { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--line-on-dark); border-radius: var(--radius); color: var(--on-dark-soft); transition: var(--transition); }
+.cu-social-link:hover { color: var(--linen); border-color: var(--brass-light); background: rgba(196,168,111,0.12); }
 .cu-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-top: 2rem; font-size: var(--fs-meta); color: rgba(239,230,213,0.5); letter-spacing: 0.04em; }
 @media (max-width: 860px) { .cu-footer-top { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .cu-footer-top { grid-template-columns: 1fr; } }
@@ -319,6 +322,34 @@ img { max-width: 100%; height: auto; }
 .cu-query .wp-block-query-pagination a, .cu-query .wp-block-query-pagination span { font-family: var(--font-sans); font-size: var(--fs-eyebrow); text-transform: uppercase; letter-spacing: var(--ls-label); color: var(--text-soft); }
 .cu-query .wp-block-query-pagination .current { color: var(--bordeaux); font-weight: 600; }
 @media (max-width: 780px) { .cu-query .wp-block-post-template { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; } }
+
+/* ---------- Case study single ---------- */
+.cu-cs-hero { position: relative; min-height: 70vh; display: flex; align-items: flex-end; text-align: left; padding: 0; }
+.cu-cs-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.cu-cs-hero .cu-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(20,17,14,0.4) 0%, rgba(20,17,14,0.75) 100%); }
+.cu-cs-hero-inner { position: relative; z-index: 2; width: 100%; max-width: 1240px; margin: 0 auto; padding: clamp(7rem,12vw,10rem) var(--gutter) clamp(3rem,6vw,4.5rem); }
+.cu-cs-hero h1 { font-size: var(--fs-h1); color: var(--linen); margin: 0.75rem 0 0; letter-spacing: -0.01em; max-width: 20ch; }
+.cu-cs-type { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--on-dark-soft); margin: 0.75rem 0 0; letter-spacing: 0.06em; text-transform: uppercase; }
+.cu-cs-stats-bar { background: var(--ink-2); border-bottom: 1px solid var(--line-on-dark); }
+.cu-cs-stats-inner { max-width: 1240px; margin: 0 auto; padding: 2.25rem var(--gutter); display: flex; gap: clamp(2rem,6vw,5rem); }
+.cu-cs-stat .num { font-family: var(--font-serif); font-size: 2.4rem; color: var(--brass-light); font-weight: 500; display: block; line-height: 1; }
+.cu-cs-stat .lab { font-family: var(--font-sans); font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: 0.1em; color: var(--on-dark-soft); margin-top: 0.5rem; display: block; }
+.cu-cs-article { max-width: 760px; }
+.cu-cs-article .cu-pull { font-size: var(--fs-pull); }
+
+/* ---------- Case study archive grid ---------- */
+.cu-page-hero-sub { font-size: var(--fs-lead); color: var(--on-dark-soft); max-width: 52ch; margin: 0.75rem auto 0; }
+.cu-cs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.cu-cs-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+.cu-cs-card-img { overflow: hidden; aspect-ratio: 16/11; background: var(--sand); }
+.cu-cs-card-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+.cu-cs-card:hover .cu-cs-card-img img { transform: scale(1.03); }
+.cu-cs-card-body { padding: 1.5rem 0; flex: 1; display: flex; flex-direction: column; gap: 0.4rem; border-top: 1px solid var(--line); margin-top: 1.25rem; }
+.cu-cs-card-loc { font-family: var(--font-sans); font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: 0.1em; color: var(--brass); }
+.cu-cs-card h3 { font-size: clamp(1.3rem,2vw,1.7rem); margin: 0.2rem 0 0.1rem; line-height: 1.2; }
+.cu-cs-card-type, .cu-cs-card-bottles { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--text-mute); }
+.cu-cs-card .cu-link { margin-top: auto; padding-top: 1rem; }
+@media (max-width: 720px) { .cu-cs-grid { grid-template-columns: 1fr; } }
 
 /* ---------- Image placeholders (art-directed, swap in the editor) ---------- */
 .cu-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.6rem; padding: 1.5rem; background: var(--sand); color: var(--ink-40); }

@@ -29,7 +29,7 @@
         <p class="cu-eyebrow">Our Studio</p>
         <p class="cu-pull">We build the room a serious collection deserves — <em>designed, made and installed</em> by one team.</p>
         <p>Walk-In Wine Cabinets Australia is a design-and-make studio specialising in climate-controlled wine rooms, walk-in cellars and bespoke cabinetry. We work with private collectors and leading hotels and restaurants who want storage that protects their investment and elevates the space it lives in.</p>
-        <a class="cu-link" href="<?php echo home_url('/enquire/'); ?>">Begin a commission <span>&rarr;</span></a>
+        <a class="cu-link" href="<?php echo home_url('/about/'); ?>">About the studio <span>&rarr;</span></a>
       </div>
       <div>
         <img class="cu-img" style="aspect-ratio:4/5;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/intro-detail.png'); ?>" alt="Wine cellar detail">
@@ -125,7 +125,7 @@
     </div>
     <div class="cu-journal">
       <?php
-      $posts = new WP_Query(['post_type'=>'post','posts_per_page'=>3,'ignore_sticky_posts'=>true]);
+      $posts = new WP_Query(['post_type'=>'post','posts_per_page'=>3,'ignore_sticky_posts'=>true,'post__not_in'=>[1]]);
       if($posts->have_posts()):
         while($posts->have_posts()): $posts->the_post();
           $cat = get_the_category(); $catname = !empty($cat) ? $cat[0]->name : 'Journal'; ?>
