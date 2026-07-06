@@ -1,0 +1,18 @@
+/*
+Theme Name: Curam — Walk-In Wine Cabinets Australia
+Theme URI: https://walkinwine.com.au
+Author: Bluelily Studios
+Author URI: https://bluelily.com.au
+Description: A warm-editorial luxury block theme for Walk-In Wine Cabinets Australia — bespoke wine rooms, walk-in cellars and cabinets. Cream & oak, bordeaux & brass, Cormorant Garamond + Work Sans. Full-site-editing block theme with a Case Study post type, filtered collection gallery and a custom enquiry form.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: curam
+Tags: full-site-editing, block-patterns, custom-colors, custom-menu, editor-style, luxury, portfolio
+*/
+
+/* Block themes are styled via theme.json + assets/css/theme.css.
+   This file only carries the theme header (required by WordPress). */
