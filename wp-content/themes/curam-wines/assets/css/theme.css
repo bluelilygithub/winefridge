@@ -30,9 +30,12 @@
   --line-strong:rgba(30,40,50,0.22);
   --line-dark:  rgba(200,210,216,0.14);
 
-  /* Typography */
-  --font-serif: 'DM Serif Display', Georgia, serif;
-  --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography
+     Swap --font-sans to test alternatives:
+       Space Grotesk: 'Space Grotesk', sans-serif
+       Archivo:        'Archivo', sans-serif                          */
+  --font-serif: Georgia, serif;
+  --font-sans:  'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --fs-display: clamp(2.75rem, 6.5vw, 5.25rem);
   --fs-h1:      clamp(2rem, 4vw, 3.25rem);
@@ -59,13 +62,21 @@ html { margin-top: 0 !important; }
 body {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
+  font-variation-settings: 'opsz' 16;
   color: var(--text);
   background: var(--white);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   margin: 0; padding: 0;
 }
-h1, h2, h3, h4 { font-family: var(--font-sans); font-weight: 700; line-height: 1.1; margin: 0 0 1rem; letter-spacing: -0.02em; }
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-variation-settings: 'opsz' 72;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+}
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 ::selection { background: var(--accent); color: var(--pure); }
@@ -142,7 +153,7 @@ a { color: inherit; }
 .cw-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.65; }
 .cw-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(165deg, rgba(11,13,15,0.3) 0%, rgba(11,13,15,0.1) 40%, rgba(11,13,15,0.85) 100%); }
 .cw-hero-inner { position: relative; z-index: 2; width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter) clamp(3rem,7vw,6rem); padding-top: 9rem; }
-.cw-hero h1 { font-size: var(--fs-display); color: var(--pure); max-width: 18ch; line-height: 1.05; margin: 1.25rem 0; }
+.cw-hero h1 { font-size: var(--fs-display); font-weight: 800; font-variation-settings: 'opsz' 96; color: var(--pure); max-width: 18ch; line-height: 1.0; margin: 1.25rem 0; letter-spacing: -0.03em; }
 .cw-hero h1 em { font-style: italic; font-weight: 300; color: var(--accent-light); }
 .cw-hero-sub { font-size: var(--fs-lead); color: rgba(200,210,216,0.85); max-width: 50ch; margin-bottom: 2.5rem; }
 .cw-hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }

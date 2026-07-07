@@ -1,5 +1,5 @@
 <?php
-define( 'CW_VERSION', '1.1.0' );
+define( 'CW_VERSION', '1.2.0' );
 
 /* -------------------------------------------------------------------------
  * Theme setup
@@ -16,7 +16,11 @@ add_action( 'after_setup_theme', function () {
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style(
 		'curam-wines-fonts',
-		'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap',
+		// Bricolage Grotesque — variable font (opsz + weight axes)
+		// To test alternatives, swap this URL:
+		//   Space Grotesk: https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap
+		//   Archivo:        https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap
+		'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap',
 		[],
 		null
 	);
