@@ -33,7 +33,7 @@
           <span class="cw-gtitle">High-Capacity Glass Room — 800+ bottles</span>
         </div>
         <div class="cw-gitem" data-cats="panel">
-          <img class="cw-gimg" src="<?php echo get_theme_file_uri('assets/images/product-panel-walkin.jpg'); ?>" alt="Panel walk-in unit">
+          <img class="cw-gimg" src="<?php echo get_theme_file_uri('assets/images/product-panel-walkin.jpg'); ?>" alt="Panel walk-in unit" style="object-position:center 15%;">
           <span class="cw-gcat">Insulated Panel Series</span>
           <span class="cw-gtitle">Panel Walk-In — 1,200 bottle capacity</span>
         </div>

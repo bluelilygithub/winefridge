@@ -69,7 +69,7 @@
     <!-- Secondary: Panel + Outdoor -->
     <div class="cw-series-secondary">
       <div class="cw-card">
-        <img class="cw-card-img" src="<?php echo get_theme_file_uri('assets/images/product-glass-niche.jpg'); ?>" alt="Insulated panel built-in unit">
+        <img class="cw-card-img" src="<?php echo get_theme_file_uri('assets/images/product-panel-walkin.jpg'); ?>" alt="Insulated panel walk-in unit" style="object-position:center 15%;">
         <div class="cw-card-body">
           <span class="cw-card-num">ii.</span>
           <h3>Insulated Panel Series</h3>
@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="cw-card">
-        <img class="cw-card-img" src="<?php echo get_theme_file_uri('assets/images/product-panel-outdoor.jpg'); ?>" alt="Outdoor-rated wine cabinet on balcony" style="object-position:center 30%;">
+        <img class="cw-card-img" src="<?php echo get_theme_file_uri('assets/images/product-panel-outdoor.jpg'); ?>" alt="Outdoor-rated wine cabinet on balcony" style="object-position:center 25%;">
         <div class="cw-card-body">
           <span class="cw-card-num">iii.</span>
           <h3>Weather-Resistant Series</h3>
