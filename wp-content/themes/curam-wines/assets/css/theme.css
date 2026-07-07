@@ -16,9 +16,9 @@
   --white:      #f6f8f9;
   --pure:       #ffffff;
 
-  --accent:       #2a6496;
-  --accent-light: #3a85c0;
-  --accent-pale:  #e8f2f9;
+  --accent:       #9a7a4a;
+  --accent-light: #b8956a;
+  --accent-pale:  #f5ede0;
 
   --text:       var(--steel-dark);
   --text-soft:  var(--steel-soft);
@@ -65,7 +65,7 @@ body {
   -webkit-font-smoothing: antialiased;
   margin: 0; padding: 0;
 }
-h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; line-height: 1.15; margin: 0 0 1rem; }
+h1, h2, h3, h4 { font-family: var(--font-sans); font-weight: 700; line-height: 1.1; margin: 0 0 1rem; letter-spacing: -0.02em; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 ::selection { background: var(--accent); color: var(--pure); }
@@ -142,8 +142,8 @@ a { color: inherit; }
 .cw-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.65; }
 .cw-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(165deg, rgba(11,13,15,0.3) 0%, rgba(11,13,15,0.1) 40%, rgba(11,13,15,0.85) 100%); }
 .cw-hero-inner { position: relative; z-index: 2; width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter) clamp(3rem,7vw,6rem); padding-top: 9rem; }
-.cw-hero h1 { font-family: var(--font-serif); font-size: var(--fs-display); color: var(--pure); max-width: 18ch; letter-spacing: -0.01em; line-height: 1.05; margin: 1.25rem 0; }
-.cw-hero h1 em { font-style: italic; color: var(--accent-light); }
+.cw-hero h1 { font-size: var(--fs-display); color: var(--pure); max-width: 18ch; line-height: 1.05; margin: 1.25rem 0; }
+.cw-hero h1 em { font-style: italic; font-weight: 300; color: var(--accent-light); }
 .cw-hero-sub { font-size: var(--fs-lead); color: rgba(200,210,216,0.85); max-width: 50ch; margin-bottom: 2.5rem; }
 .cw-hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 .cw-hero-specs { display: flex; flex-wrap: wrap; gap: clamp(1.5rem,4vw,3rem); margin-top: clamp(2.5rem,5vw,4rem); border-top: 1px solid var(--line-dark); padding-top: 1.75rem; list-style: none; padding-left: 0; margin-left: 0; }
@@ -152,26 +152,38 @@ a { color: inherit; }
 
 /* ---------- Intro / two-col ---------- */
 .cw-intro { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2.5rem,6vw,5.5rem); align-items: center; }
-.cw-pull { font-family: var(--font-serif); font-size: var(--fs-pull); line-height: 1.35; color: var(--text); font-weight: 400; margin: 0 0 1.5rem; }
+.cw-pull { font-family: var(--font-sans); font-size: var(--fs-pull); line-height: 1.35; color: var(--text); font-weight: 300; letter-spacing: -0.01em; margin: 0 0 1.5rem; }
 .cw-pull em { font-style: italic; color: var(--accent); }
 .cw-intro p { color: var(--text-soft); max-width: 52ch; margin-bottom: 1.25rem; line-height: 1.75; }
 @media (max-width: 860px) { .cw-intro { grid-template-columns: 1fr; } }
 
-/* ---------- Product series cards ---------- */
-.cw-series { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(1.25rem,2.5vw,2rem); margin-top: 3.5rem; }
+/* ---------- Product series — featured + secondary ---------- */
+.cw-series-featured {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,5vw,4rem);
+  align-items: center; margin-bottom: clamp(2.5rem,5vw,4rem);
+  padding-bottom: clamp(2.5rem,5vw,4rem); border-bottom: 1px solid var(--line);
+}
+.cw-series-featured-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+.cw-series-featured-body h3 { font-size: clamp(1.6rem,3vw,2.25rem); margin-bottom: 0.75rem; }
+.cw-series-featured-body p { color: var(--text-soft); margin-bottom: 1.5rem; line-height: 1.75; }
+.cw-series-facts { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.cw-series-facts li { font-size: var(--fs-sm); color: var(--text-soft); padding-left: 1.25rem; position: relative; }
+.cw-series-facts li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-size: var(--fs-meta); }
+.cw-series-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.25rem,2.5vw,2rem); }
 .cw-card { display: flex; flex-direction: column; background: var(--pure); border: 1px solid var(--line); }
-.cw-card-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: var(--ice); }
-.cw-card-body { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; }
-.cw-card-num { font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: var(--accent); margin-bottom: 0.5rem; }
-.cw-card h3 { font-size: 1.5rem; margin: 0 0 0.6rem; }
-.cw-card p { font-size: var(--fs-sm); color: var(--text-soft); margin-bottom: 1.25rem; flex: 1; }
-@media (max-width: 780px) { .cw-series { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; } }
+.cw-card-img { width: 100%; aspect-ratio: 3/2; object-fit: cover; background: var(--ice); }
+.cw-card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.cw-card-num { font-family: var(--font-sans); font-style: italic; font-size: 0.95rem; font-weight: 400; color: var(--accent); margin-bottom: 0.5rem; opacity: 0.8; }
+.cw-card h3 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+.cw-card p { font-size: var(--fs-sm); color: var(--text-soft); margin-bottom: 1.1rem; flex: 1; line-height: 1.65; }
+@media (max-width: 860px) { .cw-series-featured { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .cw-series-secondary { grid-template-columns: 1fr; } }
 
 /* ---------- Engineering section (dark) ---------- */
 .cw-engineering { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2.5rem,6vw,6rem); align-items: center; }
 .cw-engineering img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
 .cw-spec-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; margin-top: 2.5rem; }
-.cw-spec-item .n { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; color: var(--accent-light); display: block; margin-bottom: 0.5rem; }
+.cw-spec-item .n { font-family: var(--font-sans); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--ls-eyebrow); color: var(--accent-light); display: block; margin-bottom: 0.75rem; }
 .cw-spec-item h4 { font-size: 1.05rem; font-family: var(--font-sans); font-weight: 600; color: var(--pure); margin: 0 0 0.4rem; letter-spacing: 0; }
 .cw-spec-item p { font-size: var(--fs-sm); color: var(--on-dark-soft); margin: 0; }
 @media (max-width: 860px) { .cw-engineering { grid-template-columns: 1fr; } .cw-spec-list { grid-template-columns: 1fr; gap: 1.75rem; } }

@@ -1,5 +1,5 @@
 <?php
-define( 'CW_VERSION', '1.0.0' );
+define( 'CW_VERSION', '1.1.0' );
 
 /* -------------------------------------------------------------------------
  * Theme setup
@@ -16,7 +16,7 @@ add_action( 'after_setup_theme', function () {
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style(
 		'curam-wines-fonts',
-		'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap',
+		'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap',
 		[],
 		null
 	);

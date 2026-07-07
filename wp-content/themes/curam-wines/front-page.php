@@ -44,37 +44,50 @@
 <section class="cw-sec cw-sec--alt" id="collection">
   <div class="cw-wrap">
     <p class="cw-eyebrow">The Range</p>
-    <h2 style="font-size:var(--fs-h1);letter-spacing:-0.01em;margin-bottom:0.75rem;">Three series. Every installation.</h2>
-    <p style="color:var(--text-soft);max-width:58ch;margin-bottom:0;">Each series is engineered for a different context — the precision climate system is identical across all three.</p>
-    <div class="cw-series">
-      <div class="cw-card">
-        <img class="cw-card-img" src="<?php echo get_theme_file_uri('assets/images/product-glass-pod.jpg'); ?>" alt="Panoramic glass wine pod">
-        <div class="cw-card-body">
-          <span class="cw-card-num">i.</span>
-          <h3>Panoramic Glass Series</h3>
-          <p>Freestanding glass wine cubes and pods. Full-height visibility, internal LED lighting, digital controls. For modern apartments and open-plan living spaces.</p>
-          <a class="cw-link" href="<?php echo home_url('/products/?series=glass'); ?>">Explore <span>&rarr;</span></a>
-        </div>
+    <h2 style="font-size:var(--fs-h1);margin-bottom:0.75rem;">Three series. Every installation.</h2>
+    <p style="color:var(--text-soft);max-width:58ch;margin-bottom:3rem;">Each series is engineered for a different context — the precision climate system is identical across all three.</p>
+
+    <!-- Featured: Panoramic Glass -->
+    <div class="cw-series-featured">
+      <div class="cw-series-featured-img">
+        <img src="<?php echo get_theme_file_uri('assets/images/product-glass-pod.jpg'); ?>" alt="Panoramic glass wine pod">
       </div>
+      <div class="cw-series-featured-body">
+        <span class="cw-card-num">i.</span>
+        <h3>Panoramic Glass Series</h3>
+        <p>The flagship range. Freestanding glass wine cubes and pods — full-height visibility, internal LED lighting, digital climate controls. Designed for modern apartments, penthouses, and open-plan living spaces where the unit is part of the room, not hidden in it.</p>
+        <ul class="cw-series-facts">
+          <li>200–800 bottle capacity</li>
+          <li>Toughened double-glazed panels</li>
+          <li>Freestanding or niche-fit</li>
+          <li>Standard 10A power point</li>
+        </ul>
+        <a class="cw-btn" href="<?php echo home_url('/products/?series=glass'); ?>">Explore Panoramic Glass</a>
+      </div>
+    </div>
+
+    <!-- Secondary: Panel + Outdoor -->
+    <div class="cw-series-secondary">
       <div class="cw-card">
         <img class="cw-card-img" src="<?php echo get_theme_file_uri('assets/images/product-glass-niche.jpg'); ?>" alt="Insulated panel built-in unit">
         <div class="cw-card-body">
           <span class="cw-card-num">ii.</span>
           <h3>Insulated Panel Series</h3>
-          <p>Modular insulated panel units for alcoves, garages, and utility spaces. Maximum capacity with minimal footprint — up to 2,000 bottles. Built-in or freestanding.</p>
+          <p>Modular panel units for garages, alcoves, and utility spaces. Maximum capacity with minimal footprint — up to 2,000 bottles. Built-in or freestanding.</p>
           <a class="cw-link" href="<?php echo home_url('/products/?series=panel'); ?>">Explore <span>&rarr;</span></a>
         </div>
       </div>
       <div class="cw-card">
-        <img class="cw-card-img" src="<?php echo get_theme_file_uri('assets/images/product-panel-outdoor.jpg'); ?>" alt="Outdoor-rated wine cabinet on balcony">
+        <img class="cw-card-img" src="<?php echo get_theme_file_uri('assets/images/product-panel-outdoor.jpg'); ?>" alt="Outdoor-rated wine cabinet on balcony" style="object-position:center 30%;">
         <div class="cw-card-body">
           <span class="cw-card-num">iii.</span>
           <h3>Weather-Resistant Series</h3>
-          <p>Fully enclosed outdoor-rated units for covered balconies and semi-exposed spaces. Connects to a standard exterior power point. No shelter required.</p>
+          <p>Outdoor-rated units for covered balconies and semi-exposed spaces. Connects to a standard exterior power point. No shelter required.</p>
           <a class="cw-link" href="<?php echo home_url('/products/?series=outdoor'); ?>">Explore <span>&rarr;</span></a>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
