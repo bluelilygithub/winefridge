@@ -19,15 +19,15 @@
       </span>
     </a>
     <ul class="cu-nav">
-      <li><a href="<?php echo home_url('/products/'); ?>"<?php if(is_page('products')) echo ' class="is-active"'; ?>>Gallery</a></li>
-      <li><a href="<?php echo home_url('/'); ?>#craft">Craftsmanship</a></li>
-      <li><a href="<?php echo home_url('/case-studies/'); ?>"<?php if(is_post_type_archive('case_study')||is_singular('case_study')) echo ' class="is-active"'; ?>>Case Studies</a></li>
+      <li><a href="<?php echo home_url('/products/'); ?>"<?php if(is_page('products')) echo ' class="is-active"'; ?>>The Range</a></li>
+      <li><a href="<?php echo home_url('/'); ?>#craft">Engineering</a></li>
+      <li><a href="<?php echo home_url('/case-studies/'); ?>"<?php if(is_post_type_archive('case_study')||is_singular('case_study')) echo ' class="is-active"'; ?>>Installations</a></li>
       <li><a href="<?php echo home_url('/blog/'); ?>"<?php if(is_home()||is_category()||is_tag()||is_singular('post')) echo ' class="is-active"'; ?>>Journal</a></li>
       <li><a href="<?php echo home_url('/about/'); ?>"<?php if(is_page('about')) echo ' class="is-active"'; ?>>About</a></li>
     </ul>
     <div class="cu-header-cta">
       <a class="cu-header-phone" href="tel:1300000000">1300 000 000</a>
-      <a class="cu-btn cu-btn--light" href="<?php echo home_url('/enquire/'); ?>">Enquire</a>
+      <a class="cu-btn cu-btn--light" href="<?php echo home_url('/enquire/'); ?>">Get Specs</a>
       <button class="cu-burger" aria-label="Menu" aria-expanded="false">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>

@@ -15,12 +15,12 @@
   --ink-80: #423b32;
   --ink-60: #6d6456;
   --ink-40: #9a917f;
-  --bordeaux: #5e2333;
-  --bordeaux-deep: #401621;
-  --bordeaux-bright: #7a3345;
-  --brass: #a4834b;
-  --brass-light: #c4a86f;
-  --oak: #bd9469;
+  --bordeaux: #1a3a4a;
+  --bordeaux-deep: #102530;
+  --bordeaux-bright: #255068;
+  --brass: #4a7c8a;
+  --brass-light: #6fa3b4;
+  --oak: #5a8fa0;
 
   --text: var(--ink);
   --text-soft: var(--ink-60);
@@ -322,6 +322,15 @@ img { max-width: 100%; height: auto; }
 .cu-query .wp-block-query-pagination a, .cu-query .wp-block-query-pagination span { font-family: var(--font-sans); font-size: var(--fs-eyebrow); text-transform: uppercase; letter-spacing: var(--ls-label); color: var(--text-soft); }
 .cu-query .wp-block-query-pagination .current { color: var(--bordeaux); font-weight: 600; }
 @media (max-width: 780px) { .cu-query .wp-block-post-template { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; } }
+
+/* ---------- Product specs grid ---------- */
+.cu-specs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.cu-spec-item { padding: 2rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+.cu-spec-icon { font-family: var(--font-serif); font-size: 2rem; color: var(--bordeaux); font-weight: 500; margin-bottom: 1rem; }
+.cu-spec-item h4 { font-family: var(--font-serif); font-size: 1.2rem; margin: 0 0 0.6rem; }
+.cu-spec-item p { font-size: var(--fs-sm); color: var(--text-soft); margin: 0; }
+@media (max-width: 860px) { .cu-specs-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .cu-specs-grid { grid-template-columns: 1fr; } }
 
 /* ---------- Case study single ---------- */
 .cu-cs-hero { position: relative; min-height: 70vh; display: flex; align-items: flex-end; text-align: left; padding: 0; }

@@ -2,21 +2,21 @@
 
 <!-- HERO -->
 <section class="cu-hero">
-  <img class="cu-hero-img" src="<?php echo get_theme_file_uri('assets/images/hero.png'); ?>" alt="Bespoke walk-in wine cellar">
+  <img class="cu-hero-img" src="<?php echo get_theme_file_uri('assets/images/product-glass-cellar.jpg'); ?>" alt="Walk-in wine cabinet installed in a modern apartment">
   <div class="cu-hero-scrim"></div>
   <div class="cu-hero-inner">
-    <p class="cu-eyebrow">Bespoke Wine Rooms &amp; Cellars</p>
-    <h1>The cellar as a <em>centrepiece</em>, not a cupboard.</h1>
-    <p class="cu-hero-sub">Designed, hand-built and installed across Australia — climate-precise walk-in wine rooms that protect a serious collection and command a room.</p>
+    <p class="cu-eyebrow">Walk-In Wine Cabinets Australia</p>
+    <h1>Serious storage. <em>Zero renovation.</em></h1>
+    <p class="cu-hero-sub">Self-contained, climate-controlled wine units — freestanding, built-in, or balcony-rated. Delivered, installed, and plugged in.</p>
     <div class="cu-hero-actions">
-      <a class="cu-btn" href="<?php echo home_url('/enquire/'); ?>">Begin a Commission</a>
-      <a class="cu-btn cu-btn--light" href="<?php echo home_url('/products/'); ?>">View the Gallery</a>
+      <a class="cu-btn" href="<?php echo home_url('/products/'); ?>">Explore the Range</a>
+      <a class="cu-btn cu-btn--light" href="<?php echo home_url('/enquire/'); ?>">Get Specifications</a>
     </div>
     <ul class="cu-hero-meta">
-      <li>Bespoke design</li>
-      <li>Australian made</li>
-      <li>Installed nationwide</li>
-      <li>Private &amp; hospitality</li>
+      <li>No structural work</li>
+      <li>±0.5°C precision</li>
+      <li>Up to 2,000 bottles</li>
+      <li>Indoor &amp; outdoor rated</li>
     </ul>
   </div>
 </section>
@@ -26,68 +26,69 @@
   <div style="max-width:1240px;margin:0 auto;padding:0 var(--gutter);">
     <div class="cu-intro">
       <div>
-        <p class="cu-eyebrow">Our Studio</p>
-        <p class="cu-pull">We build the room a serious collection deserves — <em>designed, made and installed</em> by one team.</p>
-        <p>Walk-In Wine Cabinets Australia is a design-and-make studio specialising in climate-controlled wine rooms, walk-in cellars and bespoke cabinetry. We work with private collectors and leading hotels and restaurants who want storage that protects their investment and elevates the space it lives in.</p>
+        <p class="cu-eyebrow">How It Works</p>
+        <p class="cu-pull">Not a building project. <em>A precision appliance.</em></p>
+        <p>Walk-In Wine Cabinets Australia manufactures self-contained, modular wine storage units engineered for serious collectors. Every unit arrives fully assembled — insulated, refrigerated, and ready to connect to a standard power point. No builder, no permits, no structural disruption.</p>
+        <p>Our range covers freestanding glass pods for modern living rooms, insulated panel units for garages and alcoves, and fully weather-resistant cabinets for covered balconies and outdoor spaces. Same climate precision across all three — digital temperature and humidity management, held to ±0.5°C.</p>
         <a class="cu-link" href="<?php echo home_url('/about/'); ?>">About the studio <span>&rarr;</span></a>
       </div>
       <div>
-        <img class="cu-img" style="aspect-ratio:4/5;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/intro-detail.png'); ?>" alt="Wine cellar detail">
+        <img class="cu-img" style="aspect-ratio:4/5;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-glass-pod.jpg'); ?>" alt="Freestanding panoramic glass wine pod">
       </div>
     </div>
   </div>
 </section>
 
-<!-- COLLECTION -->
+<!-- PRODUCT SERIES -->
 <section class="cu-sec cu-sec--alt" id="collection">
   <div style="max-width:1240px;margin:0 auto;padding:0 var(--gutter);">
     <div class="cu-head">
-      <p class="cu-eyebrow">The Collection</p>
-      <h2>Three ways to house a collection</h2>
-      <p>From a glass-walled walk-in cellar to a sculptural cabinet, each is engineered around your bottles, your space and your climate.</p>
+      <p class="cu-eyebrow">The Range</p>
+      <h2>Three series. One standard of precision.</h2>
+      <p>Each series is engineered for a different installation context — the performance specification is identical across all three.</p>
     </div>
     <div class="cu-collection">
       <div class="cu-card">
-        <img class="cu-img" style="aspect-ratio:3/4;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/cellars.png'); ?>" alt="Walk-in wine cellar">
+        <img class="cu-img" style="aspect-ratio:3/4;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-glass-pod.jpg'); ?>" alt="Panoramic glass wine pod">
         <span class="cu-num">i.</span>
-        <h3>Walk-In Cellars</h3>
-        <p>Glass-enclosed rooms from 500 to 5,000+ bottles. A destination within the home or venue.</p>
-        <a class="cu-link" href="<?php echo home_url('/products/'); ?>">Explore <span>&rarr;</span></a>
+        <h3>Panoramic Glass Series</h3>
+        <p>Freestanding glass wine cubes and pods. Full-height visibility, internal LED lighting, digital controls. Designed for modern apartments and open-plan living rooms.</p>
+        <a class="cu-link" href="<?php echo home_url('/products/?series=glass'); ?>">Explore <span>&rarr;</span></a>
       </div>
       <div class="cu-card">
-        <img class="cu-img" style="aspect-ratio:3/4;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/wine-walls.png'); ?>" alt="Wine wall">
+        <img class="cu-img" style="aspect-ratio:3/4;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-glass-niche.jpg'); ?>" alt="Insulated panel built-in unit">
         <span class="cu-num">ii.</span>
-        <h3>Wine Walls</h3>
-        <p>Backlit feature walls that divide a space and put the collection on display, climate sealed behind glass.</p>
-        <a class="cu-link" href="<?php echo home_url('/products/'); ?>">Explore <span>&rarr;</span></a>
+        <h3>Insulated Panel Series</h3>
+        <p>Modular insulated panel units for alcoves, garages, and utility spaces. Built-in or freestanding. Maximum capacity in minimum footprint — up to 2,000 bottles.</p>
+        <a class="cu-link" href="<?php echo home_url('/products/?series=panel'); ?>">Explore <span>&rarr;</span></a>
       </div>
       <div class="cu-card">
-        <img class="cu-img" style="aspect-ratio:3/4;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/bespoke.png'); ?>" alt="Bespoke cabinet">
+        <img class="cu-img" style="aspect-ratio:3/4;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-panel-outdoor.jpg'); ?>" alt="Outdoor rated wine cabinet on balcony">
         <span class="cu-num">iii.</span>
-        <h3>Bespoke Cabinets</h3>
-        <p>Freestanding and built-in cabinetry, tailored joinery and finishes to suit the room it lives in.</p>
-        <a class="cu-link" href="<?php echo home_url('/products/'); ?>">Explore <span>&rarr;</span></a>
+        <h3>Weather-Resistant Series</h3>
+        <p>Fully enclosed outdoor-rated units engineered for covered balconies and semi-exposed spaces. Connects to a standard exterior power point. No shelter required.</p>
+        <a class="cu-link" href="<?php echo home_url('/products/?series=outdoor'); ?>">Explore <span>&rarr;</span></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CRAFT -->
+<!-- ENGINEERING -->
 <section class="cu-sec cu-sec--dark" id="craft">
   <div style="max-width:1240px;margin:0 auto;padding:0 var(--gutter);">
     <div class="cu-craft">
       <div>
-        <img class="cu-img" style="aspect-ratio:4/5;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/craft.png'); ?>" alt="Cellar craftsmanship">
+        <img class="cu-img" style="aspect-ratio:4/5;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-panel-walkin.jpg'); ?>" alt="Insulated panel walk-in cabinet">
       </div>
       <div>
-        <p class="cu-eyebrow">The Craftsmanship</p>
-        <h2 style="font-size:var(--fs-h1);margin:0 0 0.5rem;letter-spacing:-0.01em;">Built to last a lifetime of vintages.</h2>
-        <p style="font-size:var(--fs-lead);max-width:48ch;">Australian-made, engineered for our climate, and finished to the standard of fine furniture.</p>
+        <p class="cu-eyebrow">The Engineering</p>
+        <h2 style="font-size:var(--fs-h1);margin:0 0 0.5rem;letter-spacing:-0.01em;">Built around the performance spec, not the aesthetic.</h2>
+        <p style="font-size:var(--fs-lead);max-width:48ch;">Every unit ships with the same core climate system regardless of series or size.</p>
         <div class="cu-craft-list">
-          <div class="cu-craft-item"><span class="n">01</span><h4>Bespoke design</h4><p>Drawn to your space and collection — no two commissions are the same.</p></div>
-          <div class="cu-craft-item"><span class="n">02</span><h4>Australian made</h4><p>Designed, manufactured and installed by our own team, nationwide.</p></div>
-          <div class="cu-craft-item"><span class="n">03</span><h4>Climate precision</h4><p>Temperature and humidity held to fine cellar tolerances, quietly.</p></div>
-          <div class="cu-craft-item"><span class="n">04</span><h4>Investment protection</h4><p>Safeguards a collection worth many times the cabinet itself.</p></div>
+          <div class="cu-craft-item"><span class="n">01</span><h4>±0.5°C precision</h4><p>Digital compressor control with continuous temperature monitoring. No cycling, no drift.</p></div>
+          <div class="cu-craft-item"><span class="n">02</span><h4>Humidity managed</h4><p>Active humidity regulation to 60–70% RH. Corks stay sealed. Labels stay intact.</p></div>
+          <div class="cu-craft-item"><span class="n">03</span><h4>Plug-and-play install</h4><p>Standard 10A or 15A power point. No builder, no permits, no structural work required.</p></div>
+          <div class="cu-craft-item"><span class="n">04</span><h4>High-capacity design</h4><p>Modular units stack and join. Scale from 200 to 2,000+ bottles without a second footprint.</p></div>
         </div>
       </div>
     </div>
@@ -99,18 +100,18 @@
   <div style="max-width:1240px;margin:0 auto;padding:0 var(--gutter);">
     <div class="cu-case">
       <div>
-        <img class="cu-img" style="aspect-ratio:16/11;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/case.png'); ?>" alt="Yarra Valley cellar">
+        <img class="cu-img" style="aspect-ratio:16/11;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-glass-cellar.jpg'); ?>" alt="High-capacity glass cellar in penthouse">
       </div>
       <div>
-        <p class="cu-eyebrow">Case Study</p>
-        <h2>An 1,800-bottle cellar in the Yarra Valley</h2>
-        <p>A glass-walled walk-in built into a new-build residence — blackbutt racking, brushed brass, and a full-height pivot door as the home's centrepiece.</p>
+        <p class="cu-eyebrow">Installation</p>
+        <h2>400-bottle glass unit. Brisbane penthouse. One afternoon.</h2>
+        <p>Installed into an existing living room wall niche with no structural modification. Unit delivered pre-assembled, positioned, levelled, and connected to the existing power point. Operational within two hours of arrival on site.</p>
         <div class="cu-stats">
-          <div><div class="num">1,800</div><div class="lab">Bottles</div></div>
-          <div><div class="num">14&deg;C</div><div class="lab">Held &plusmn;0.5</div></div>
-          <div><div class="num">9</div><div class="lab">Weeks</div></div>
+          <div><div class="num">400</div><div class="lab">Bottles</div></div>
+          <div><div class="num">14°C</div><div class="lab">Held ±0.5</div></div>
+          <div><div class="num">2hrs</div><div class="lab">Install time</div></div>
         </div>
-        <a class="cu-btn cu-btn--outline" href="<?php echo home_url('/case-studies/'); ?>">View Case Studies</a>
+        <a class="cu-btn cu-btn--outline" href="<?php echo home_url('/case-studies/'); ?>">View Installations</a>
       </div>
     </div>
   </div>
@@ -121,7 +122,7 @@
   <div style="max-width:1240px;margin:0 auto;padding:0 var(--gutter);">
     <div class="cu-head is-center">
       <p class="cu-eyebrow is-center">From the Journal</p>
-      <h2>Notes on collecting &amp; craft</h2>
+      <h2>Storage, spec &amp; the serious collector</h2>
     </div>
     <div class="cu-journal">
       <?php
@@ -132,7 +133,7 @@
           <article class="cu-post">
             <a href="<?php the_permalink(); ?>">
               <?php if(has_post_thumbnail()) the_post_thumbnail('large',['class'=>'cu-img','style'=>'aspect-ratio:3/2;object-fit:cover;width:100%;']);
-              else echo '<img class="cu-img" style="aspect-ratio:3/2;object-fit:cover;width:100%;" src="'.get_theme_file_uri('assets/images/journal-1.png').'" alt="">'; ?>
+              else echo '<img class="cu-img" style="aspect-ratio:3/2;object-fit:cover;width:100%;" src="'.get_theme_file_uri('assets/images/product-glass-pod.jpg').'" alt="">'; ?>
             </a>
             <div class="meta"><?php echo esc_html($catname); ?> &middot; <?php echo get_the_date(); ?></div>
             <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -140,9 +141,9 @@
           </article>
         <?php endwhile; wp_reset_postdata();
       else: ?>
-        <article class="cu-post"><img class="cu-img" style="aspect-ratio:3/2;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/journal-1.png'); ?>" alt=""><div class="meta">Collecting &middot; 5 min</div><h3><a href="<?php echo home_url('/blog/'); ?>">How much cellar do you actually need?</a></h3><p>Sizing a cellar around how you buy, drink and hold — not just today's bottle count.</p></article>
-        <article class="cu-post"><img class="cu-img" style="aspect-ratio:3/2;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/craft.png'); ?>" alt=""><div class="meta">Craft &middot; 6 min</div><h3><a href="<?php echo home_url('/blog/'); ?>">Why humidity matters as much as temperature</a></h3><p>The quiet variable that protects labels, corks and long-term value.</p></article>
-        <article class="cu-post"><img class="cu-img" style="aspect-ratio:3/2;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/wine-walls.png'); ?>" alt=""><div class="meta">Hospitality &middot; 4 min</div><h3><a href="<?php echo home_url('/blog/'); ?>">The cellar as a guest experience</a></h3><p>What hotels and restaurants gain from a wine room worth walking into.</p></article>
+        <article class="cu-post"><img class="cu-img" style="aspect-ratio:3/2;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-glass-niche.jpg'); ?>" alt=""><div class="meta">Storage &middot; 5 min</div><h3><a href="<?php echo home_url('/blog/'); ?>">How much storage do you actually need?</a></h3><p>Sizing a unit around how you buy, drink and hold — not just today's bottle count.</p></article>
+        <article class="cu-post"><img class="cu-img" style="aspect-ratio:3/2;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-panel-walkin.jpg'); ?>" alt=""><div class="meta">Technical &middot; 6 min</div><h3><a href="<?php echo home_url('/blog/'); ?>">Why humidity matters as much as temperature</a></h3><p>The variable that protects corks, labels and the long-term value of your collection.</p></article>
+        <article class="cu-post"><img class="cu-img" style="aspect-ratio:3/2;object-fit:cover;width:100%;" src="<?php echo get_theme_file_uri('assets/images/product-panel-outdoor.jpg'); ?>" alt=""><div class="meta">Installation &middot; 4 min</div><h3><a href="<?php echo home_url('/blog/'); ?>">Balcony installs: what makes a unit outdoor-rated?</a></h3><p>What separates a weather-resistant cabinet from one that will fail in six months.</p></article>
       <?php endif; ?>
     </div>
   </div>
@@ -151,11 +152,12 @@
 <!-- CTA BAND -->
 <section class="cu-sec cu-cta">
   <div style="max-width:1240px;margin:0 auto;padding:0 var(--gutter);text-align:center;">
-    <p class="cu-eyebrow is-center">Begin</p>
-    <h2>Commission your cellar</h2>
-    <p>Tell us about your space and collection. We'll design a wine room around it and give you an honest sense of scope before you commit.</p>
+    <p class="cu-eyebrow is-center">Get Started</p>
+    <h2>Find the right unit for your space</h2>
+    <p>Tell us your bottle count, available space, and installation context. We'll recommend the right series, size, and configuration — no obligation.</p>
     <div class="cu-cta-actions">
-      <a class="cu-btn cu-btn--light" href="<?php echo home_url('/enquire/'); ?>">Start an Enquiry</a>
+      <a class="cu-btn cu-btn--light" href="<?php echo home_url('/enquire/'); ?>">Get Specifications</a>
+      <a class="cu-btn cu-btn--light" href="<?php echo home_url('/products/'); ?>" style="background:transparent;">Explore the Range</a>
     </div>
   </div>
 </section>

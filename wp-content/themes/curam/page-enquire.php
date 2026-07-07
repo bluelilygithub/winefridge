@@ -6,7 +6,7 @@ $status = isset($_GET['enquiry']) ? sanitize_key($_GET['enquiry']) : '';
 <section class="cu-page-hero">
   <img class="cu-page-hero-crest" src="<?php echo get_theme_file_uri('assets/images/crest-white.png'); ?>" alt="">
   <p class="cu-eyebrow is-center">Get in Touch</p>
-  <h1>Enquiries</h1>
+  <h1>Get Specifications &amp; Pricing</h1>
 </section>
 
 <section class="cu-sec">
@@ -51,11 +51,11 @@ $status = isset($_GET['enquiry']) ? sanitize_key($_GET['enquiry']) : '';
       </div>
 
       <div class="cu-field">
-        <label>Message</label>
-        <textarea name="message" rows="5" placeholder="Tell us about your project…"></textarea>
+        <label>Tell us about your space</label>
+        <textarea name="message" rows="5" placeholder="Bottle count, available space, installation context (apartment, house, balcony, commercial)…"></textarea>
       </div>
 
-      <button type="submit" class="cu-btn" style="width:100%;margin-top:0.5rem;">Send Enquiry</button>
+      <button type="submit" class="cu-btn" style="width:100%;margin-top:0.5rem;">Request Specifications</button>
     </form>
 
   </div>

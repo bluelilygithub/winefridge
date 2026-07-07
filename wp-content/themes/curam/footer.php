@@ -9,28 +9,28 @@
             <span class="b2">Australia</span>
           </span>
         </a>
-        <p class="cu-footer-blurb">Bespoke climate-controlled wine rooms, designed and built in Australia.</p>
+        <p class="cu-footer-blurb">Precision climate-controlled wine units — freestanding, built-in, and outdoor-rated. Delivered and installed across Australia.</p>
       </div>
       <div>
-        <h5>Collection</h5>
+        <h5>The Range</h5>
         <ul>
-          <li><a href="<?php echo home_url('/products/'); ?>">Walk-In Cellars</a></li>
-          <li><a href="<?php echo home_url('/products/'); ?>">Wine Walls</a></li>
-          <li><a href="<?php echo home_url('/products/'); ?>">Bespoke Cabinets</a></li>
+          <li><a href="<?php echo home_url('/products/?series=glass'); ?>">Panoramic Glass Series</a></li>
+          <li><a href="<?php echo home_url('/products/?series=panel'); ?>">Insulated Panel Series</a></li>
+          <li><a href="<?php echo home_url('/products/?series=outdoor'); ?>">Weather-Resistant Series</a></li>
         </ul>
       </div>
       <div>
-        <h5>Studio</h5>
+        <h5>Company</h5>
         <ul>
           <li><a href="<?php echo home_url('/about/'); ?>">About</a></li>
-          <li><a href="<?php echo home_url('/case-studies/'); ?>">Case Studies</a></li>
+          <li><a href="<?php echo home_url('/case-studies/'); ?>">Installations</a></li>
           <li><a href="<?php echo home_url('/blog/'); ?>">Journal</a></li>
         </ul>
       </div>
       <div>
         <h5>Contact</h5>
         <ul>
-          <li><a href="<?php echo home_url('/enquire/'); ?>">Start an Enquiry</a></li>
+          <li><a href="<?php echo home_url('/enquire/'); ?>">Get Specifications</a></li>
           <li><a href="tel:1300000000">1300 000 000</a></li>
           <li><a href="mailto:studio@walkinwine.com.au">studio@walkinwine.com.au</a></li>
         </ul>
