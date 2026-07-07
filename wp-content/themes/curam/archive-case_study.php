@@ -4,8 +4,8 @@
 <section class="cu-page-hero">
   <img class="cu-page-hero-crest" src="<?php echo get_theme_file_uri( 'assets/images/crest-white.png' ); ?>" alt="">
   <p class="cu-eyebrow is-center">Our Work</p>
-  <h1>Installations</h1>
-  <p class="cu-page-hero-sub">Apartments, penthouses, commercial venues, and outdoor installs across Australia.</p>
+  <h1>Case Studies</h1>
+  <p class="cu-page-hero-sub">A selection of commissions — private residences, hotels and restaurants across Australia.</p>
 </section>
 
 <!-- CASE STUDY GRID -->

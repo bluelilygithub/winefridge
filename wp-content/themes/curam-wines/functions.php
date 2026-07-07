@@ -1,14 +1,5 @@
 <?php
-/**
- * Curam — Walk-In Wine Cabinets Australia
- * Classic theme functions.
- */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
-
-define( 'CURAM_VERSION', '1.0.4' );
-
-// Hide the WordPress admin bar on the front end.
-add_filter( 'show_admin_bar', '__return_false' );
+define( 'CW_VERSION', '1.0.0' );
 
 /* -------------------------------------------------------------------------
  * Theme setup
@@ -16,7 +7,7 @@ add_filter( 'show_admin_bar', '__return_false' );
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
-	add_theme_support( 'html5', array( 'search-form', 'gallery', 'caption', 'style', 'script' ) );
+	add_theme_support( 'html5', [ 'search-form', 'comment-form', 'gallery', 'caption' ] );
 } );
 
 /* -------------------------------------------------------------------------
@@ -24,50 +15,62 @@ add_action( 'after_setup_theme', function () {
  * ---------------------------------------------------------------------- */
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style(
-		'curam-fonts',
-		'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&display=swap',
-		array(),
+		'curam-wines-fonts',
+		'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap',
+		[],
 		null
 	);
-	wp_enqueue_style( 'curam-theme', get_theme_file_uri( 'assets/css/theme.css' ), array( 'curam-fonts' ), CURAM_VERSION );
-	wp_enqueue_script( 'curam-theme', get_theme_file_uri( 'assets/js/theme.js' ), array(), CURAM_VERSION, true );
+	wp_enqueue_style(
+		'curam-wines-theme',
+		get_template_directory_uri() . '/assets/css/theme.css',
+		[ 'curam-wines-fonts' ],
+		CW_VERSION
+	);
+	wp_enqueue_script(
+		'curam-wines-theme',
+		get_template_directory_uri() . '/assets/js/theme.js',
+		[],
+		CW_VERSION,
+		true
+	);
 } );
 
 /* -------------------------------------------------------------------------
  * Case Study custom post type
  * ---------------------------------------------------------------------- */
 add_action( 'init', function () {
-	register_post_type( 'case_study', array(
-		'labels'       => array(
-			'name'          => 'Case Studies',
-			'singular_name' => 'Case Study',
-			'menu_name'     => 'Case Studies',
-		),
+	register_post_type( 'case_study', [
+		'labels'       => [
+			'name'          => 'Installations',
+			'singular_name' => 'Installation',
+			'menu_name'     => 'Installations',
+			'add_new_item'  => 'Add New Installation',
+			'edit_item'     => 'Edit Installation',
+		],
 		'public'       => true,
 		'has_archive'  => true,
 		'menu_icon'    => 'dashicons-portfolio',
-		'rewrite'      => array( 'slug' => 'case-studies' ),
+		'rewrite'      => [ 'slug' => 'installations' ],
 		'show_in_rest' => true,
-		'supports'     => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
-	) );
+		'supports'     => [ 'title', 'editor', 'excerpt', 'thumbnail' ],
+	] );
 } );
 
 /* -------------------------------------------------------------------------
  * Enquiry form handler
  * ---------------------------------------------------------------------- */
-add_action( 'admin_post_nopriv_curam_enquiry', 'curam_handle_enquiry' );
-add_action( 'admin_post_curam_enquiry',        'curam_handle_enquiry' );
+add_action( 'admin_post_nopriv_cw_enquiry', 'cw_handle_enquiry' );
+add_action( 'admin_post_cw_enquiry',        'cw_handle_enquiry' );
 
-function curam_handle_enquiry() {
+function cw_handle_enquiry() {
 	$redirect = wp_get_referer() ?: home_url( '/enquire/' );
 
-	if ( empty( $_POST['curam_enquiry_nonce'] ) || ! wp_verify_nonce( $_POST['curam_enquiry_nonce'], 'curam_enquiry' ) ) {
+	if ( empty( $_POST['cw_enquiry_nonce'] ) || ! wp_verify_nonce( $_POST['cw_enquiry_nonce'], 'cw_enquiry' ) ) {
 		wp_safe_redirect( add_query_arg( 'enquiry', 'error', $redirect ) );
 		exit;
 	}
 
-	// Honeypot.
-	if ( ! empty( $_POST['curam_website'] ) ) {
+	if ( ! empty( $_POST['cw_website'] ) ) {
 		wp_safe_redirect( add_query_arg( 'enquiry', 'sent', $redirect ) );
 		exit;
 	}
@@ -76,7 +79,8 @@ function curam_handle_enquiry() {
 	$email    = sanitize_email(      wp_unslash( $_POST['email']    ?? '' ) );
 	$phone    = sanitize_text_field( wp_unslash( $_POST['phone']    ?? '' ) );
 	$city     = sanitize_text_field( wp_unslash( $_POST['city']     ?? '' ) );
-	$deadline = sanitize_text_field( wp_unslash( $_POST['deadline'] ?? '' ) );
+	$bottles  = sanitize_text_field( wp_unslash( $_POST['bottles']  ?? '' ) );
+	$series   = sanitize_text_field( wp_unslash( $_POST['series']   ?? '' ) );
 	$message  = sanitize_textarea_field( wp_unslash( $_POST['message'] ?? '' ) );
 
 	if ( empty( $name ) || empty( $email ) || ! is_email( $email ) ) {
@@ -85,12 +89,14 @@ function curam_handle_enquiry() {
 	}
 
 	$to      = get_option( 'admin_email' );
-	$subject = "[Enquiry] {$name}";
-	$body    = "Name: {$name}\nEmail: {$email}\nPhone: {$phone}\nCity: {$city}\nDeadline: {$deadline}\n\nMessage:\n{$message}";
-	$headers = array( 'Content-Type: text/plain; charset=UTF-8', "Reply-To: {$name} <{$email}>" );
+	$subject = "[Specs Request] {$name}";
+	$body    = "Name: {$name}\nEmail: {$email}\nPhone: {$phone}\nCity: {$city}\nBottle count: {$bottles}\nSeries interest: {$series}\n\nMessage:\n{$message}";
+	$headers = [ 'Content-Type: text/plain; charset=UTF-8', "Reply-To: {$name} <{$email}>" ];
 
 	wp_mail( $to, $subject, $body, $headers );
 
 	wp_safe_redirect( add_query_arg( 'enquiry', 'sent', $redirect ) . '#enquire' );
 	exit;
 }
+
+add_filter( 'show_admin_bar', '__return_false' );
