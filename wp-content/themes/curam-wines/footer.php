@@ -39,8 +39,8 @@
         <h5>Contact</h5>
         <ul>
           <li><a href="<?php echo home_url('/enquire/'); ?>">Get Specifications</a></li>
-          <li><a href="tel:1300000000">1300 000 000</a></li>
-          <li><a href="mailto:studio@walkinwine.com.au">studio@walkinwine.com.au</a></li>
+          <li><a href="tel:1300924671">1300 924 671</a></li>
+          <li><a href="mailto:enquiries@walkinwinecabinets.com.au">enquiries@walkinwinecabinets.com.au</a></li>
         </ul>
       </div>
     </div>

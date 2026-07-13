@@ -261,6 +261,38 @@ a { color: inherit; }
 .cw-page-hero-sub { font-size: var(--fs-lead); color: var(--on-dark-soft); max-width: 52ch; margin: 1rem auto 0; }
 .cw-page-hero-crest { height: 52px; width: auto; margin: 0 auto 1.5rem; opacity: 0.85; }
 
+/* ---------- Plate hero — image-backed title band ----------
+   Used by page.php and single.php. Scrim is deliberately darkest
+   at the very top so the floating header nav stays legible
+   against any photo, and darkest again behind the title text. */
+.cw-plate-hero { position: relative; min-height: 42vh; display: flex; align-items: flex-end; overflow: hidden; background: var(--steel-dark); }
+.cw-plate-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+.cw-plate-hero-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,13,15,0.62) 0%, rgba(11,13,15,0.22) 38%, rgba(11,13,15,0.86) 100%); }
+.cw-plate-hero-inner { position: relative; z-index: 2; width: 100%; max-width: 900px; margin: 0 auto; padding: clamp(8rem,14vw,11rem) var(--gutter) clamp(3rem,5vw,4rem); }
+.cw-plate-hero-inner.is-center { text-align: center; }
+.cw-plate-hero-kicker { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.6rem; font-family: var(--font-sans); font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: 0.08em; color: var(--on-dark-soft); margin-bottom: 0.9rem; }
+.cw-plate-hero-inner.is-center .cw-plate-hero-kicker { justify-content: center; }
+.cw-plate-hero-kicker .cat { color: var(--accent-light); font-weight: 600; }
+.cw-plate-hero h1 { color: var(--pure); font-size: var(--fs-h1); letter-spacing: -0.01em; margin: 0; max-width: 26ch; }
+.cw-plate-hero-inner.is-center h1 { margin-inline: auto; }
+.cw-plate-hero-sub { font-size: var(--fs-lead); color: var(--on-dark-soft); max-width: 52ch; margin: 1rem 0 0; }
+.cw-plate-hero-inner.is-center .cw-plate-hero-sub { margin-inline: auto; }
+
+/* ---------- Product single ---------- */
+.cw-prod-body { display: grid; grid-template-columns: 1fr 300px; gap: clamp(2.5rem, 5vw, 5rem); align-items: start; padding: var(--section-y) var(--gutter); max-width: 1280px; margin: 0 auto; }
+.cw-prod-content .cw-article { max-width: none; margin: 0; padding: 0; }
+.cw-prod-specs { position: sticky; top: 6rem; padding: 2rem; background: var(--ice); border: 1px solid var(--line); }
+.cw-prod-specs-label { font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em; font-weight: 700; color: var(--steel-dark); margin: 0 0 1.5rem; }
+.cw-prod-specs .cw-ledger { display: block; }
+.cw-prod-specs .cw-ledger tbody { display: block; }
+.cw-prod-specs .cw-ledger tr { display: block; border-bottom: 1px solid var(--line); padding: 0.85rem 0; }
+.cw-prod-specs .cw-ledger tr:first-child { border-top: 1px solid var(--line); }
+.cw-prod-specs .cw-ledger th,
+.cw-prod-specs .cw-ledger td { display: block; width: 100%; padding: 0; border: 0; }
+.cw-prod-specs .cw-ledger th { font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-mute); font-weight: 500; margin-bottom: 0.25rem; }
+.cw-prod-specs .cw-ledger td { font-family: var(--font-serif); font-size: 1rem; color: var(--text-soft); line-height: 1.45; }
+@media (max-width: 900px) { .cw-prod-body { grid-template-columns: 1fr; } .cw-prod-specs { position: static; } }
+
 /* ---------- Gallery / products ---------- */
 .cw-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 3rem; }
 .cw-chip { font-size: var(--fs-label); text-transform: uppercase; letter-spacing: var(--ls-label); font-weight: 600; color: var(--text-soft); background: transparent; border: 1px solid var(--line-strong); border-radius: 999px; padding: 0.55rem 1.25rem; cursor: pointer; transition: var(--transition); font-family: var(--font-sans); }
@@ -346,13 +378,177 @@ a { color: inherit; }
 @media (max-width: 720px) { .cw-cs-grid { grid-template-columns: 1fr; } }
 
 /* ---------- FAQ ---------- */
-.cw-faq { max-width: 820px; margin: 0 auto; }
-.cw-faq details { border-bottom: 1px solid var(--line); padding: 1.25rem 0; }
-.cw-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; font-family: var(--font-serif); font-size: 1.35rem; color: var(--text); font-weight: 400; }
+.cw-faq { max-width: 860px; margin: 0 auto; }
+.cw-faq-group { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.cw-faq-group-title { font-size: var(--fs-label); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ls-eyebrow); color: var(--accent); padding-bottom: 1rem; border-bottom: 2px solid var(--accent); margin-bottom: 0; }
+.cw-faq details { border-bottom: 1px solid var(--line); }
+.cw-faq summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  font-family: var(--font-sans); font-size: 1.05rem; font-weight: 600;
+  color: var(--text); padding: 1.25rem 0; line-height: 1.4;
+}
 .cw-faq summary::-webkit-details-marker { display: none; }
-.cw-faq summary::after { content: '+'; font-family: var(--font-sans); font-size: 1.4rem; color: var(--accent); transition: var(--transition); flex-shrink: 0; }
+.cw-faq summary::after {
+  content: '+'; font-family: var(--font-sans); font-size: 1.3rem; font-weight: 300;
+  color: var(--accent); transition: var(--transition); flex-shrink: 0; line-height: 1;
+}
 .cw-faq details[open] summary::after { transform: rotate(45deg); }
-.cw-faq .cw-faq-a { margin-top: 1rem; color: var(--text-soft); max-width: 68ch; }
+.cw-faq details[open] summary { color: var(--accent); }
+.cw-faq .cw-faq-a { padding: 0 0 1.5rem; color: var(--text-soft); line-height: 1.75; font-size: var(--fs-sm); max-width: 72ch; }
+.cw-faq .cw-faq-a p { margin: 0 0 0.85rem; }
+.cw-faq .cw-faq-a p:last-child { margin-bottom: 0; }
 
 /* ---------- Generic page content ---------- */
 .cw-page-content { max-width: 740px; margin: 0 auto; padding: var(--section-y) var(--gutter); }
+
+/* ============================================================
+   Shared editorial components — interior pages
+   (single posts, about, products, installations, enquire).
+   Uses the site's existing steel/gold tokens (not the homepage's
+   cream/ink-green cover treatment) — replaces repeated CTA bands,
+   stat-chip trios, and decorative numbering with quieter,
+   page-specific alternatives.
+   ============================================================ */
+
+/* ---- Quiet endnote — replaces the repeated cw-cta band ---- */
+.cw-endnote { background: var(--ice); padding: clamp(3.5rem, 6vw, 5.5rem) 0; }
+.cw-endnote-inner { max-width: 640px; margin: 0 auto; padding: 0 var(--gutter); }
+.cw-endnote h2 { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: clamp(1.3rem, 2vw, 1.65rem); color: var(--text); letter-spacing: 0; margin: 0 0 0.85rem; }
+.cw-endnote p { color: var(--text-soft); font-size: var(--fs-sm); line-height: 1.75; max-width: 56ch; margin: 0 0 1.5rem; }
+.cw-endnote-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+
+/* ---- Ledger table — replaces stat-chip / big-value-label cards ---- */
+.cw-ledger { width: 100%; border-collapse: collapse; }
+.cw-ledger tr { border-bottom: 1px solid var(--line); }
+.cw-ledger tr:first-child { border-top: 1px solid var(--line); }
+.cw-ledger th, .cw-ledger td { text-align: left; padding: 0.9rem 0; font-weight: 400; }
+.cw-ledger th { font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-mute); width: 44%; }
+.cw-ledger td { font-family: var(--font-serif); font-size: 1.05rem; color: var(--text); }
+
+/* ---- Timeline — for real sequences only (process steps) ---- */
+.cw-timeline { display: flex; flex-direction: column; margin-top: 2.5rem; }
+.cw-timeline-step { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding: 1.75rem 0; border-top: 1px solid var(--line-dark); }
+.cw-timeline-step:last-child { border-bottom: 1px solid var(--line-dark); }
+.cw-timeline-step .n { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; color: var(--accent-light); line-height: 1; }
+.cw-timeline-step h4 { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 600; color: var(--pure); margin: 0 0 0.4rem; }
+.cw-timeline-step p { font-size: var(--fs-sm); color: var(--on-dark-soft); margin: 0; max-width: 52ch; }
+@media (max-width: 560px) { .cw-timeline-step { grid-template-columns: 1fr; gap: 0.35rem; } }
+
+/* ---- Note card over photo — documentary device (case studies) ---- */
+.cw-note-photo { position: relative; }
+.cw-note-photo img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.cw-note-card {
+  position: relative; margin: -3.5rem clamp(1.25rem, 6vw, 6rem) 0; padding: clamp(1.75rem, 4vw, 2.5rem);
+  background: var(--pure); max-width: 560px; box-shadow: 0 16px 40px rgba(0,0,0,0.16); border: 1px solid var(--line);
+}
+.cw-note-card .lab { font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mute); margin: 0 0 1rem; display: block; }
+.cw-note-card p:not(.lab) { font-size: var(--fs-sm); color: var(--text-soft); line-height: 1.8; margin: 0; }
+@media (max-width: 700px) { .cw-note-card { margin: -2.5rem var(--gutter) 0; max-width: none; } }
+
+/* ---- Article running head — replaces boxed meta line ---- */
+.cw-article-kicker { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.6rem; font-family: var(--font-sans); font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-mute); margin-bottom: 1.75rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+.cw-article-kicker .cat { color: var(--accent); font-weight: 600; }
+.cw-article-plate { margin: 2.25rem 0 2.5rem; }
+.cw-article-plate img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+.cw-article-plate figcaption { font-family: var(--font-sans); font-size: 0.78rem; color: var(--text-mute); font-style: italic; margin-top: 0.75rem; }
+
+/* ============================================================
+   Homepage — "The Catalogue"
+   Scoped entirely to cw-hp2- classes. Deliberately distinct
+   from the rest of the site: warm paper instead of cool ice,
+   deep bottle-green ink instead of steel/gold, serif-forward
+   headings. Does not touch shared classes used by other pages.
+   ============================================================ */
+:root {
+  --hp-paper:    #f2ece0;
+  --hp-ink:      #23372a;
+  --hp-ink-soft: rgba(35,55,42,0.7);
+  --hp-ink-mute: rgba(35,55,42,0.48);
+  --hp-rule:     rgba(35,55,42,0.2);
+  --hp-cream:    #faf7f0;
+}
+
+/* ---- Movement I: Opening plate ---- */
+.cw-hp2-plate { position: relative; min-height: 100vh; overflow: hidden; background: var(--steel-dark); }
+.cw-hp2-plate-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cw-hp2-plate-scrim { position: absolute; top: 0; left: 0; right: 0; height: 30vh; background: linear-gradient(180deg, rgba(11,13,15,0.55) 0%, rgba(11,13,15,0) 100%); }
+.cw-hp2-tag {
+  position: absolute; left: clamp(1.25rem, 4vw, 3.5rem); bottom: clamp(1.5rem, 5vw, 4rem);
+  max-width: 460px; background: var(--hp-cream); padding: 2.25rem 2.5rem;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+}
+.cw-hp2-tag-label { font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--hp-ink-mute); margin: 0 0 0.9rem; }
+.cw-hp2-tag-line { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; line-height: 1.5; color: var(--hp-ink); margin: 0 0 1.4rem; }
+.cw-hp2-tag-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-sans); font-size: var(--fs-label); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ls-label); color: var(--hp-ink); text-decoration: none; border-top: 1px solid var(--hp-rule); padding-top: 1rem; width: 100%; }
+.cw-hp2-tag-link span { color: #9a7a4a; transition: var(--transition); }
+.cw-hp2-tag-link:hover span { transform: translateX(4px); }
+
+/* ---- Movement II: Specification plate ---- */
+.cw-hp2-spec { background: var(--hp-paper); padding: clamp(4.5rem, 8vw, 7rem) 0; }
+.cw-hp2-spec-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: 0.72fr 1fr; gap: clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
+.cw-hp2-spec-fig { margin: 0; }
+.cw-hp2-spec-fig img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border: 1px solid var(--hp-rule); }
+.cw-hp2-spec-fig figcaption { font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.04em; color: var(--hp-ink-mute); margin-top: 0.85rem; font-style: italic; }
+.cw-hp2-spec-body h2 { font-family: var(--font-serif); font-weight: 400; font-style: italic; font-size: clamp(1.6rem, 2.4vw, 2.15rem); color: var(--hp-ink); letter-spacing: 0; margin: 0 0 1.25rem; }
+.cw-hp2-spec-body > p { font-family: var(--font-sans); font-size: var(--fs-body); color: var(--hp-ink-soft); line-height: 1.85; max-width: 56ch; margin: 0 0 2.25rem; }
+.cw-hp2-ledger { width: 100%; border-collapse: collapse; }
+.cw-hp2-ledger tr { border-bottom: 1px solid var(--hp-rule); }
+.cw-hp2-ledger tr:first-child { border-top: 1px solid var(--hp-rule); }
+.cw-hp2-ledger th, .cw-hp2-ledger td { text-align: left; padding: 0.85rem 0; font-weight: 400; }
+.cw-hp2-ledger th { font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--hp-ink-mute); width: 46%; }
+.cw-hp2-ledger td { font-family: var(--font-serif); font-size: 1.05rem; color: var(--hp-ink); }
+
+/* ---- Movement III: Two readers (typography only) ---- */
+.cw-hp2-readers { background: var(--hp-cream); padding: clamp(4.5rem, 8vw, 7rem) 0; border-top: 1px solid var(--hp-rule); }
+.cw-hp2-readers-inner { max-width: 1060px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.cw-hp2-reader { padding: 0 clamp(2rem, 4vw, 3.5rem); border-right: 1px solid var(--hp-rule); }
+.cw-hp2-reader:last-child { border-right: 0; }
+.cw-hp2-reader h2 { font-family: var(--font-serif); font-weight: 400; font-style: italic; font-size: clamp(1.4rem, 2vw, 1.85rem); color: var(--hp-ink); margin: 0 0 1rem; }
+.cw-hp2-reader p { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--hp-ink-soft); line-height: 1.85; margin: 0 0 1.5rem; max-width: 42ch; }
+.cw-hp2-readers .cw-hp2-split-link { color: var(--hp-ink); }
+
+/* ---- Movement IV: Site record (small figure + prose) ---- */
+.cw-hp2-record { background: var(--hp-paper); padding: clamp(4.5rem, 8vw, 7rem) 0; }
+.cw-hp2-record-inner { max-width: 960px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: 220px 1fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+.cw-hp2-record-fig { margin: 0; }
+.cw-hp2-record-fig img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; border: 1px solid var(--hp-rule); }
+.cw-hp2-record-fig figcaption { font-family: var(--font-sans); font-size: 0.68rem; letter-spacing: 0.04em; color: var(--hp-ink-mute); margin-top: 0.65rem; font-style: italic; }
+.cw-hp2-record-label { font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--hp-ink-mute); margin: 0 0 1rem; }
+.cw-hp2-record-body p:not(.cw-hp2-record-label) { font-family: var(--font-sans); font-size: var(--fs-body); color: var(--hp-ink-soft); line-height: 1.85; margin: 0 0 1.5rem; max-width: 58ch; }
+.cw-hp2-record-body .cw-hp2-split-link { color: var(--hp-ink); }
+
+/* Shared homepage text links */
+.cw-hp2-split-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-sans); font-size: var(--fs-label); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ls-label); text-decoration: none; }
+.cw-hp2-split-link span { color: #9a7a4a; transition: var(--transition); }
+.cw-hp2-split-link:hover span { transform: translateX(4px); }
+
+/* ---- Movement V: Closing plate ---- */
+.cw-hp2-close { background: var(--hp-paper); padding: clamp(5rem, 9vw, 7.5rem) 0 clamp(4rem, 7vw, 6rem); }
+.cw-hp2-close-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 6rem); border-top: 1px solid var(--hp-rule); padding-top: clamp(3rem, 6vw, 4.5rem); }
+.cw-hp2-close h2 { font-family: var(--font-serif); font-weight: 400; font-style: italic; font-size: clamp(1.3rem, 1.9vw, 1.6rem); color: var(--hp-ink); margin: 0 0 1.5rem; }
+.cw-hp2-close-range p { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--hp-ink-soft); line-height: 1.75; margin: 0 0 1rem; }
+.cw-hp2-close-range p strong { color: var(--hp-ink); font-weight: 600; }
+.cw-hp2-close-range .cw-hp2-split-link { color: var(--hp-ink); margin-top: 0.75rem; }
+.cw-hp2-close-contact p { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--hp-ink-soft); line-height: 1.75; max-width: 34ch; margin: 0 0 1.5rem; }
+.cw-hp2-close-details { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.75rem; }
+.cw-hp2-close-details a { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: var(--hp-ink); text-decoration: none; }
+.cw-hp2-close-details a:hover { color: #9a7a4a; }
+.cw-hp2-close-fine { font-size: 0.8rem !important; color: var(--hp-ink-mute) !important; margin-top: 1.5rem !important; }
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .cw-hp2-spec-inner { grid-template-columns: 1fr; }
+  .cw-hp2-readers-inner { grid-template-columns: 1fr; }
+  .cw-hp2-reader { border-right: 0; border-bottom: 1px solid var(--hp-rule); padding: 0 0 2.5rem; margin-bottom: 2.5rem; }
+  .cw-hp2-reader:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+  .cw-hp2-record-inner { grid-template-columns: 1fr; }
+  .cw-hp2-record-fig { max-width: 220px; }
+  .cw-hp2-close-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+  .cw-hp2-tag { position: static; margin: 0; max-width: none; box-shadow: none; }
+  .cw-hp2-plate { min-height: auto; display: flex; flex-direction: column; }
+  .cw-hp2-plate-img { position: static; width: 100%; height: 60vh; }
+  .cw-hp2-plate-scrim { display: none; }
+}

@@ -1,5 +1,5 @@
 <?php
-define( 'CW_VERSION', '1.2.1' );
+define( 'CW_VERSION', '1.3.0' );
 
 /* -------------------------------------------------------------------------
  * Theme setup
@@ -37,6 +37,27 @@ add_action( 'wp_enqueue_scripts', function () {
 		CW_VERSION,
 		true
 	);
+} );
+
+/* -------------------------------------------------------------------------
+ * Product custom post type
+ * ---------------------------------------------------------------------- */
+add_action( 'init', function () {
+	register_post_type( 'product', [
+		'labels'       => [
+			'name'          => 'Products',
+			'singular_name' => 'Product',
+			'menu_name'     => 'Products',
+			'add_new_item'  => 'Add New Product',
+			'edit_item'     => 'Edit Product',
+		],
+		'public'       => true,
+		'has_archive'  => false,
+		'menu_icon'    => 'dashicons-archive',
+		'rewrite'      => [ 'slug' => 'range' ],
+		'show_in_rest' => true,
+		'supports'     => [ 'title', 'editor', 'excerpt', 'thumbnail' ],
+	] );
 } );
 
 /* -------------------------------------------------------------------------

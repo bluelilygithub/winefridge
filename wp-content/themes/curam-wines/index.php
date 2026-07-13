@@ -1,8 +1,6 @@
 <?php get_header(); ?>
 
 <section class="cw-page-hero">
-  <img class="cw-page-hero-crest" src="<?php echo get_theme_file_uri('assets/images/crest-white.png'); ?>" alt="">
-  <p class="cw-eyebrow is-center">Journal</p>
   <h1>Storage, spec &amp; the serious collector</h1>
 </section>
 

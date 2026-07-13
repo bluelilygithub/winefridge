@@ -1,28 +1,26 @@
 <?php
 get_header();
-$status = isset($_GET['enquiry']) ? sanitize_key($_GET['enquiry']) : '';
+$status          = isset( $_GET['enquiry'] ) ? sanitize_key( $_GET['enquiry'] ) : '';
+$prefill_product = isset( $_GET['product'] ) ? sanitize_text_field( wp_unslash( $_GET['product'] ) ) : '';
 ?>
 
 <section class="cw-page-hero">
-  <img class="cw-page-hero-crest" src="<?php echo get_theme_file_uri('assets/images/crest-white.png'); ?>" alt="">
-  <p class="cw-eyebrow is-center">Get in Touch</p>
-  <h1>Get Specifications &amp; Pricing</h1>
-  <p class="cw-page-hero-sub">Tell us your bottle count and space — we'll come back with the right unit and a fixed price.</p>
+  <h1>Tell us about the space</h1>
+  <p class="cw-page-hero-sub">Bottle count, room, and access — that's enough for us to confirm a series and a fixed price.</p>
 </section>
 
 <section class="cw-sec" id="enquire">
   <div class="cw-wrap">
     <div class="cw-enquiry">
       <div class="cw-enquiry-intro">
-        <p class="cw-eyebrow">What happens next</p>
-        <h2>No obligation. No sales pressure.</h2>
-        <p>Tell us your bottle count, available space, and where you want to install the unit. We'll confirm the right series, the right size, and a fixed price — usually within one business day.</p>
-        <p>If you're not sure what you need, just describe the space. We'll work it out from there.</p>
+        <h2>What happens after you send this</h2>
+        <p>We read it the same day and confirm the right series, the right size, and a fixed price — usually within one business day. There's no site visit required to get a quote, and no cost attached to asking.</p>
+        <p>If you're not sure what you need yet, just describe the space. We'll work it out from there.</p>
         <div class="cw-enquiry-contact">
           <strong>Call us</strong><br>
-          <a href="tel:1300000000">1300 000 000</a><br><br>
+          <a href="tel:1300924671">1300 924 671</a><br><br>
           <strong>Email</strong><br>
-          <a href="mailto:studio@walkinwine.com.au">studio@walkinwine.com.au</a>
+          <a href="mailto:enquiries@walkinwinecabinets.com.au">enquiries@walkinwinecabinets.com.au</a>
         </div>
       </div>
       <div>
@@ -30,6 +28,10 @@ $status = isset($_GET['enquiry']) ? sanitize_key($_GET['enquiry']) : '';
           <div class="cw-alert cw-alert--ok">Thank you — we'll be in touch within one business day with specifications and pricing.</div>
         <?php elseif($status === 'error'): ?>
           <div class="cw-alert cw-alert--err">Something went wrong. Please check your details and try again.</div>
+        <?php endif; ?>
+
+        <?php if ( $prefill_product ) : ?>
+          <p style="font-size:var(--fs-sm);color:var(--text-soft);padding:0.85rem 1rem;background:var(--ice);border:1px solid var(--line);margin-bottom:1.5rem;">Enquiring about: <strong style="color:var(--text);"><?php echo esc_html( $prefill_product ); ?></strong></p>
         <?php endif; ?>
 
         <form class="cw-form" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
@@ -65,8 +67,8 @@ $status = isset($_GET['enquiry']) ? sanitize_key($_GET['enquiry']) : '';
               <input type="text" name="bottles" placeholder="e.g. 200–400 bottles">
             </div>
             <div class="cw-field">
-              <label>Series interest</label>
-              <input type="text" name="series" placeholder="Glass / Panel / Outdoor / Unsure">
+              <label>Model / series interest</label>
+              <input type="text" name="series" value="<?php echo esc_attr( $prefill_product ); ?>" placeholder="Glass / Panel / Outdoor / Unsure">
             </div>
           </div>
 

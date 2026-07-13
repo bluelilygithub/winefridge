@@ -1,10 +1,8 @@
 <?php get_header(); ?>
 
 <section class="cw-page-hero">
-  <img class="cw-page-hero-crest" src="<?php echo get_theme_file_uri('assets/images/crest-white.png'); ?>" alt="">
-  <p class="cw-eyebrow is-center">Our Work</p>
   <h1>Installations</h1>
-  <p class="cw-page-hero-sub">Apartments, penthouses, garages, balconies, and commercial venues across Australia.</p>
+  <p class="cw-page-hero-sub">A record of what's actually gone in — apartments, penthouses, garages, balconies, and commercial venues.</p>
 </section>
 
 <section class="cw-sec">
@@ -38,13 +36,12 @@
   </div>
 </section>
 
-<section class="cw-sec cw-cta">
-  <div class="cw-wrap" style="text-align:center;">
-    <p class="cw-eyebrow is-center">Get Started</p>
-    <h2>Find the right unit for your space</h2>
-    <p>Tell us your bottle count and installation context — we'll confirm the right series and a fixed price.</p>
-    <div class="cw-cta-actions">
-      <a class="cw-btn" href="<?php echo home_url('/enquire/'); ?>">Get Specifications</a>
+<section class="cw-endnote">
+  <div class="cw-endnote-inner">
+    <h2>Every install starts the same way</h2>
+    <p>A bottle count, a room, and a photo if you have one. We'll tell you which series fits and what it costs before anything is booked in.</p>
+    <div class="cw-endnote-actions">
+      <a class="cw-btn" href="<?php echo home_url('/enquire/'); ?>">Get specifications</a>
     </div>
   </div>
 </section>
