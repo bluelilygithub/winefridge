@@ -1,0 +1,168 @@
+/* ============================================================
+   Accessibility — WCAG 2.1 AA oriented enhancements
+   ============================================================ */
+
+/* Skip link */
+.cw-skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--gutter);
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: var(--steel-dark);
+  color: var(--pure);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--accent-light);
+  border-radius: var(--radius);
+}
+.cw-skip-link:focus,
+.cw-skip-link:focus-visible {
+  top: 1rem;
+  outline: none;
+}
+
+/* Screen-reader only text */
+.cw-sr-only,
+.screen-reader-text {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Visible keyboard focus — never remove without replacement */
+:focus { outline: none; }
+
+:focus-visible {
+  outline: 3px solid var(--accent-light);
+  outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+.cw-btn:focus-visible,
+.cw-link:focus-visible,
+.cw-chip:focus-visible,
+.cw-gallery-tile:focus-visible,
+.cw-post-media-item:focus-visible,
+.cw-gitem:focus-visible,
+.cw-cs-card:focus-visible,
+.cw-compare-card:focus-visible,
+.cw-series-card:focus-visible,
+.cw-fit-guide-rec:focus-visible {
+  outline: 3px solid var(--accent-light);
+  outline-offset: 3px;
+}
+
+.cw-header .cw-nav a:focus-visible {
+  outline-color: var(--pure);
+  outline-offset: 4px;
+}
+
+.cw-field input:focus,
+.cw-field select:focus,
+.cw-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--pure);
+  box-shadow: 0 0 0 3px rgba(154, 122, 74, 0.35);
+}
+
+.cw-field input:focus-visible,
+.cw-field select:focus-visible,
+.cw-field textarea:focus-visible {
+  box-shadow: 0 0 0 3px rgba(154, 122, 74, 0.45);
+}
+
+.cw-gallery-lightbox-close:focus-visible,
+.cw-gallery-lightbox-prev:focus-visible,
+.cw-gallery-lightbox-next:focus-visible {
+  outline-color: var(--pure);
+}
+
+.cw-mobile-cta-phone:focus-visible,
+.cw-mobile-cta-btn:focus-visible {
+  outline-color: var(--pure);
+  outline-offset: 2px;
+}
+
+/* Disabled controls */
+button:disabled,
+.cw-gallery-lightbox-prev:disabled,
+.cw-gallery-lightbox-next:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Live region for filter / dialog announcements */
+.cw-live-region {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Modal open — header/footer not interactive */
+body.cw-lightbox-open .cw-header,
+body.cw-lightbox-open .cw-footer,
+body.cw-lightbox-open .cw-mobile-cta {
+  pointer-events: none;
+}
+
+body.cw-lightbox-open #main-content {
+  visibility: hidden;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Minimum touch target on mobile interactive elements */
+@media (max-width: 960px) {
+  .cw-burger,
+  .cw-chip,
+  .cw-nav.is-open a,
+  .cw-mobile-cta-phone,
+  .cw-mobile-cta-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .cw-nav.is-open a {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* High-contrast / forced-colors support */
+@media (forced-colors: active) {
+  .cw-btn,
+  .cw-chip,
+  .cw-gallery-tile,
+  .cw-gitem {
+    border: 2px solid ButtonText;
+  }
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+}

@@ -9,30 +9,36 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
-<header class="cw-header">
+<div class="cw-live-region" id="cw-live-region" aria-live="polite" aria-atomic="true"></div>
+
+<header class="cw-header<?php echo is_front_page() ? ' is-overlay' : ' is-solid'; ?>" role="banner">
   <div class="cw-header-inner">
-    <a class="cw-brand" href="<?php echo home_url('/'); ?>">
-      <img class="cw-brand-crest" src="<?php echo get_theme_file_uri('assets/images/crest-white.png'); ?>" alt="Walk-In Wine Cabinets Australia">
+    <a class="cw-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+      <img class="cw-brand-crest" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/crest-white.png' ) ); ?>" alt="" width="44" height="44" decoding="async">
       <span class="cw-brand-text">
         <span class="b1">Walk-In Wine Cabinets</span>
         <span class="b2">Australia</span>
       </span>
     </a>
-    <ul class="cw-nav">
-      <li><a href="<?php echo home_url('/products/'); ?>"<?php if(is_page('products')) echo ' class="is-active"'; ?>>The Range</a></li>
-      <li><a href="<?php echo home_url('/'); ?>#craft">Engineering</a></li>
-      <li><a href="<?php echo home_url('/installations/'); ?>"<?php if(is_post_type_archive('case_study')||is_singular('case_study')) echo ' class="is-active"'; ?>>Installations</a></li>
-      <li><a href="<?php echo home_url('/blog/'); ?>"<?php if(is_home()||is_category()||is_tag()||is_singular('post')) echo ' class="is-active"'; ?>>Journal</a></li>
-      <li><a href="<?php echo home_url('/about/'); ?>"<?php if(is_page('about')) echo ' class="is-active"'; ?>>About</a></li>
-      <li><a href="<?php echo home_url('/faq/'); ?>"<?php if(is_page('faq')) echo ' class="is-active"'; ?>>FAQ</a></li>
-    </ul>
+    <nav class="cw-nav" id="cw-primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="<?php echo esc_url( home_url( '/products/' ) ); ?>"<?php echo cw_nav_link_attrs( 'products' ); ?>>The Range</a></li>
+        <li><a href="<?php echo esc_url( home_url( '/engineering/' ) ); ?>"<?php echo cw_nav_link_attrs( 'engineering' ); ?>>How It Works</a></li>
+        <li><a href="<?php echo esc_url( home_url( '/installations/' ) ); ?>"<?php echo cw_nav_link_attrs( 'installations' ); ?>>Installations</a></li>
+        <li><a href="<?php echo esc_url( get_post_type_archive_link( 'rack' ) ?: home_url( '/racking/' ) ); ?>"<?php echo cw_nav_link_attrs( 'racking' ); ?>>Racking</a></li>
+        <li><a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>"<?php echo cw_nav_link_attrs( 'gallery' ); ?>>Gallery</a></li>
+        <li><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>"<?php echo cw_nav_link_attrs( 'faq' ); ?>>FAQ</a></li>
+      </ul>
+    </nav>
     <div class="cw-header-cta">
-      <a class="cw-header-phone" href="tel:1300924671">1300 924 671</a>
-      <a class="cw-btn cw-btn--ghost" href="<?php echo home_url('/enquire/'); ?>">Get Specs</a>
-      <button class="cw-burger" aria-label="Menu" aria-expanded="false">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <a class="cw-header-phone" href="tel:<?php echo esc_attr( cw_get_org_phone_tel() ); ?>" aria-label="<?php echo esc_attr( 'Call ' . cw_get_org_phone() ); ?>"><?php echo esc_html( cw_get_org_phone() ); ?></a>
+      <a class="cw-btn cw-btn--ghost" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>">Get a fixed quote</a>
+      <button type="button" class="cw-burger" aria-label="Open menu" aria-expanded="false" aria-controls="cw-primary-nav">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
     </div>
   </div>
 </header>
+<?php cw_open_main(); ?>

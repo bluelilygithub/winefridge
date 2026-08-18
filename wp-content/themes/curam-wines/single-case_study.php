@@ -38,6 +38,12 @@
   <?php the_content(); ?>
 </article>
 
+<section class="cw-sec cw-sec--alt">
+  <div class="cw-wrap">
+    <?php get_template_part( 'template-parts/post-media', null, [ 'post_id' => get_the_ID() ] ); ?>
+  </div>
+</section>
+
 <?php endwhile; ?>
 
 <section class="cw-endnote">
@@ -45,7 +51,7 @@
     <h2>If your space is similar</h2>
     <p>Tell us the bottle count and the room — we'll confirm whether the same series works for you, or what would need to change.</p>
     <div class="cw-endnote-actions">
-      <a class="cw-btn" href="<?php echo home_url('/enquire/'); ?>">Get specifications</a>
+      <a class="cw-btn" href="<?php echo home_url('/enquire/'); ?>">Get a fixed quote</a>
       <a class="cw-link" href="<?php echo home_url('/installations/'); ?>">All installations <span>&rarr;</span></a>
     </div>
   </div>

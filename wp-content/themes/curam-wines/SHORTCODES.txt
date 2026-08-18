@@ -1,0 +1,284 @@
+Walk-In Wine Cabinets Australia — Page Shortcodes
+=================================================
+Theme: curam-wines
+
+Paste shortcodes into the WordPress page editor (Pages → edit page).
+Use the classic editor. Shortcodes also appear in the admin sidebar box
+"Dynamic content blocks" when editing any page.
+
+Headings, paragraphs, and endnotes are normal HTML in the page editor.
+Shortcodes insert dynamic blocks that pull live data from Products and
+Installations — you do not edit those tables or grids by hand.
+
+
+PAGE HERO (standard pages — not homepage)
+-----------------------------------------
+On pages that use the plate hero (About, Products, Engineering, etc.):
+
+  Title          → hero headline
+  Excerpt        → hero subtitle (below headline)
+  Featured image → hero background photo
+
+The homepage uses [cw_home_hero] instead (see below).
+
+
+SECTION MARKUP
+--------------
+Wrap editable copy and shortcodes in sections, e.g.:
+
+  <section class="cw-sec">
+    <div class="cw-wrap">
+      <h2>Your heading</h2>
+      <p>Your intro copy.</p>
+      [cw_product_grid]
+    </div>
+  </section>
+
+Use cw-sec--alt on alternate background sections.
+Use cw-endnote for closing call-to-action bands.
+
+Trust strip: place [cw_trust_strip] directly after the hero. The theme
+removes extra padding so it sits flush as a full-width bar — do not add
+extra margin around it.
+
+
+SHORTCODES
+==========
+
+[cw_home_hero]
+  Homepage hero only. Uses the front page Title, Excerpt, and Featured
+  image. Includes "Get a fixed quote" and "See the range" buttons.
+
+  Optional attribute:
+    eyebrow="Walk-In Wine Cabinets Australia"
+      Small label above the headline.
+
+  Example:
+    [cw_home_hero]
+    [cw_home_hero eyebrow="Walk-In Wine Cabinets Australia"]
+
+
+[cw_trust_strip]
+  Full-width dark trust bar: lowest product price, warranty, delivery,
+  lead time, Australian-made. Price is pulled automatically from Products.
+
+  Optional attribute:
+    compact="1"   Smaller inline version for sidebar use (Enquire page).
+
+  Examples:
+    [cw_trust_strip]
+    [cw_trust_strip compact="1"]
+
+
+[cw_fit_guide]
+  "Which configuration fits your space?" — links each buyer situation
+  (apartment, house, garage, etc.) to the recommended product.
+
+  Data source: Products (first product matching each situation checkbox).
+  Edit product names, excerpts, and situation checkboxes under Products.
+
+
+[cw_product_grid]
+  Filterable grid of all published products. Situation and series filter
+  chips above the cards. Each card shows series, title, capacity, install
+  type, and price.
+
+  Data source: Products CPT + sidebar meta (series, price, situations, etc.).
+
+
+[cw_product_compare]
+  Mobile compare cards + desktop compare table for all products.
+  Columns: configuration, series, capacity, dimensions, install type,
+  from (installed) price.
+
+  Data source: Products CPT. Updates when product meta changes.
+
+
+[cw_series_cards]
+  Three series overview cards (Glass, Panel, Outdoor) with image, lowest
+  price in that series, and excerpt from the first product in each series.
+
+  Data source: Products CPT grouped by series.
+
+
+[cw_shared_specs]
+  Specification ledger table for shared climate / power specs.
+
+  Optional attributes:
+    context="shared"       Default. Shows temp range, accuracy, humidity,
+                           power supply.
+    context="engineering"  Extended table for How It Works page — adds
+                           noise range (from products), refrigerant, recovery
+                           time, cooling type.
+    fields="temp_range,humidity,noise"
+                           Comma-separated field keys to show specific rows
+                           only. Keys match product spec slugs: temp_range,
+                           temp_accuracy, humidity, power, noise, refrigerant,
+                           cooling, power_draw, airflow, finish, volume.
+
+  Examples:
+    [cw_shared_specs]
+    [cw_shared_specs context="engineering"]
+    [cw_shared_specs fields="temp_range,humidity,power"]
+
+
+[cw_installations_grid]
+  Filterable grid of installation case studies with location, type, and
+  bottle count. Property-type filter chips at the top.
+
+  Data source: Installations CPT + sidebar meta (property, location, etc.).
+
+  Used on: /installations/ (via the "Installations" page, slug
+  installations-intro — not in the main nav menu).
+
+
+[cw_gallery_grid]
+  Photo and video gallery with filter chips (Products / Installations /
+  Videos) and click-to-open lightbox with prev/next navigation.
+
+  Data source: Products and Installations that have gallery media and
+  "Show on Gallery page" ticked in admin.
+
+
+[cw_top_faq]
+  "Common questions" accordion strip (five buyer FAQs with links).
+
+  Content is theme-defined (template-parts/top-faq.php). Edit that file
+  to change questions, or replace with your own HTML on the page.
+
+
+[cw_video_block]
+  Featured video player. Uses the site video from the media library
+  (converted.mp4 / ID stored in site settings). First video found is
+  cached automatically.
+
+  Optional attributes:
+    title="See how installation works"
+    intro="Optional paragraph above the video."
+    caption="Caption below the video."
+
+  Example:
+    [cw_video_block title="See how installation works" intro="A finished cabinet delivered to site." caption="Install footage."]
+
+
+[cw_featured_installation]
+  Highlight block for the most recent installation(s): image, location,
+  title, excerpt, and links.
+
+  Optional attribute:
+    count="1"   Number of installations to show (default 1).
+
+  Data source: Installations CPT (newest first).
+
+  Examples:
+    [cw_featured_installation]
+    [cw_featured_installation count="2"]
+
+
+[cw_process_steps]
+  Walk-in wine cellar definition + seven-step process diagram and detail
+  list (consultation → supply & install). Self-contained dark section —
+  paste the shortcode on its own line (do not wrap in another cw-sec).
+
+  Optional attributes:
+    heading="What is a walk-in wine cellar?"
+    intro="…"
+    cta="Optional note under the buttons."
+
+  Example:
+    [cw_process_steps]
+
+
+[cw_racking_styles]
+  Six racking-style cards with placeholder media until photos are ready.
+  Used on /racking/. Add a classic gallery on that page to fill images
+  in card order.
+
+
+[cw_enquiry_form]
+  Full quote request form (quick fields + optional detail toggle).
+  Posts to the theme enquiry handler. Use on the Enquire page inside the
+  right column of the cw-enquiry layout.
+
+
+[cw_min_price]
+  Inline text only — outputs the lowest installed price from all products,
+  e.g. "From $5,400 installed". Use inside a sentence in the page editor.
+
+  Example:
+    Self-contained units from [cw_min_price]. No builder required.
+
+
+WHERE DATA IS EDITED
+====================
+
+Products (The Range, /range/…)
+  WP Admin → Products
+  Controls: title, description, featured image, series, price, capacity,
+  dimensions, install type, situations, specs, gallery, video.
+
+Installations (/installations/…)
+  WP Admin → Installations
+  Controls: title, description, featured image, property type, location,
+  bottle count, gallery, video.
+
+Pages (copy + shortcode placement)
+  WP Admin → Pages
+
+
+TYPICAL PAGE SHORTCODES
+=======================
+
+Home (/)
+  [cw_home_hero]
+  [cw_trust_strip]
+  [cw_video_block]
+  [cw_series_cards]
+  [cw_shared_specs]
+  [cw_featured_installation]
+  [cw_process_steps]          ← walk-in definition + 7-step process
+  [cw_top_faq]
+
+The Range (/products/)
+  [cw_trust_strip]
+  [cw_fit_guide]
+  [cw_product_grid]
+  [cw_product_compare]
+  [cw_shared_specs]
+  [cw_top_faq]
+
+How It Works (/engineering/)
+  [cw_shared_specs context="engineering"]
+  [cw_video_block]
+  [cw_fit_guide]
+  Optional: [cw_process_steps] if you want the same process on this page
+
+Racking archive (/racking/)
+  Driven by the Racks custom post type and archive template.
+  Edit the archive hero / SEO on the page with slug racking-intro.
+  Add or reorder entries under WP Admin → Racks.
+
+Gallery (/gallery/)
+  [cw_gallery_grid]
+
+Enquire (/enquire/)
+  [cw_enquiry_form]
+  [cw_trust_strip compact="1"]   (in sidebar intro column)
+
+Installations archive (/installations/)
+  Edit page: Installations (slug installations-intro)
+  [cw_installations_grid]
+
+FAQ (/faq/)
+  FAQ content is HTML in the page editor (details/summary elements).
+  No shortcodes required unless you add [cw_top_faq] elsewhere.
+
+
+NOTES
+=====
+- Shortcodes are ignored inside Products and Installations — use those
+  post types only for individual configurations and case studies.
+- After changing a shortcode list in a page, click Update and view the
+  front end to confirm layout.
+- If a dynamic block is empty, check that relevant Products or
+  Installations are published and have the required meta filled in.
