@@ -67,13 +67,15 @@
   <aside class="cw-prod-specs">
     <?php if ( $price ) : ?>
       <p class="cw-prod-price"><?php echo esc_html( $price ); ?></p>
-      <p class="cw-prod-price-note">Fixed quote confirmed after we check your space</p>
+      <p class="cw-prod-price-note">Quote confirmed after we check your space</p>
     <?php endif; ?>
     <p class="cw-prod-specs-label">Specifications</p>
     <?php get_template_part( 'template-parts/product-specs', null, [ 'specs' => $specs ] ); ?>
     <div class="cw-prod-specs-cta">
-      <a class="cw-btn" href="<?php echo esc_url( $enquire_url ); ?>">Get a fixed quote</a>
-      <a class="cw-link" href="tel:<?php echo esc_attr( cw_get_org_phone_tel() ); ?>">Or call <?php echo esc_html( cw_get_org_phone() ); ?></a>
+      <a class="cw-btn" href="<?php echo esc_url( $enquire_url ); ?>"<?php echo cw_gtm_quote_attrs( 'product_sidebar' ); ?>>Get a quote</a>
+      <?php if ( cw_get_org_phone() ) : ?>
+        <a class="cw-link" href="tel:<?php echo esc_attr( cw_get_org_phone_tel() ); ?>"<?php echo cw_gtm_phone_attrs( 'product_sidebar' ); ?>>Or call <?php echo esc_html( cw_get_org_phone() ); ?></a>
+      <?php endif; ?>
     </div>
   </aside>
 </div>
@@ -82,10 +84,10 @@
 
 <section class="cw-endnote">
   <div class="cw-endnote-inner">
-    <h2>Confirm the fit, get a fixed price</h2>
+    <h2>Confirm the fit, get a quote</h2>
     <p>Give us the bottle count and the room dimensions. We'll confirm whether this configuration works for your space, or point you to the one that does.</p>
     <div class="cw-endnote-actions">
-      <a class="cw-btn" href="<?php echo esc_url( $enquire_url ); ?>">Get a fixed quote</a>
+      <a class="cw-btn" href="<?php echo esc_url( $enquire_url ); ?>"<?php echo cw_gtm_quote_attrs( 'product_endnote' ); ?>>Get a quote</a>
       <a class="cw-link" href="<?php echo esc_url( home_url( '/products/' ) ); ?>">All configurations <span>&rarr;</span></a>
     </div>
   </div>

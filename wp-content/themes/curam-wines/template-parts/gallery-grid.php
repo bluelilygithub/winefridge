@@ -1,20 +1,23 @@
 <?php
 /**
- * Gallery page grid — media from Products + Installations CPTs.
+ * Gallery page grid — items from the Gallery CPT, filtered by gallery categories.
  */
 $slides = cw_get_gallery_slides();
+$terms  = cw_get_gallery_filter_terms();
 if ( empty( $slides ) ) {
-	echo '<p class="cw-empty">No gallery items yet. Add photos or video to a Product or Installation in WP Admin, tick <strong>Show on Gallery page</strong>, and publish.</p>';
+	echo '<p class="cw-empty">No gallery items yet. Add them under <strong>Gallery</strong> in WP Admin, set a featured image, and assign a category.</p>';
 	return;
 }
 ?>
 <div class="cw-gallery-page-wrap" data-lightbox-group="gallery-page">
-  <div class="cw-filter cw-filter--gallery" role="group" aria-label="Gallery filter">
-    <button type="button" class="cw-chip is-active" data-filter="*" aria-pressed="true">All</button>
-    <button type="button" class="cw-chip" data-filter="product" aria-pressed="false">Products</button>
-    <button type="button" class="cw-chip" data-filter="installation" aria-pressed="false">Installations</button>
-    <button type="button" class="cw-chip" data-filter="video" aria-pressed="false">Videos</button>
-  </div>
+  <?php if ( $terms ) : ?>
+    <div class="cw-filter cw-filter--gallery" role="group" aria-label="Gallery filter">
+      <button type="button" class="cw-chip is-active" data-filter="*" aria-pressed="true">All</button>
+      <?php foreach ( $terms as $term ) : ?>
+        <button type="button" class="cw-chip" data-filter="<?php echo esc_attr( $term->slug ); ?>" aria-pressed="false"><?php echo esc_html( $term->name ); ?></button>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
 
   <div class="cw-gallery-page-grid">
     <?php foreach ( $slides as $slide ) : ?>
@@ -46,4 +49,3 @@ if ( empty( $slides ) ) {
     <?php endforeach; ?>
   </div>
 </div>
-<?php

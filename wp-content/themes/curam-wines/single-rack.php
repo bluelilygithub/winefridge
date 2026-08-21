@@ -27,7 +27,7 @@
     <p class="cw-rack-single-label">Why choose this direction</p>
     <p>This style becomes the brief for the final fit-out: spacing, bottle orientation, large-format handling, and where the collection is stored versus displayed.</p>
     <div class="cw-prod-specs-cta">
-      <a class="cw-btn" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>">Discuss this rack style</a>
+      <a class="cw-btn" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>"<?php echo cw_gtm_quote_attrs( 'rack_single' ); ?>>Discuss this rack style</a>
       <a class="cw-link" href="<?php echo esc_url( get_post_type_archive_link( 'rack' ) ); ?>">All rack styles <span>&rarr;</span></a>
     </div>
   </aside>
@@ -40,7 +40,7 @@
     <h2>Ready to match racking to your cellar?</h2>
     <p>We can pair this fit-out direction with the right enclosure, materials, and final bottle count once we know the room and collection.</p>
     <div class="cw-endnote-actions">
-      <a class="cw-btn" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>">Start a consultation</a>
+      <a class="cw-btn" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>"<?php echo cw_gtm_quote_attrs( 'rack_single_cta' ); ?>>Start a consultation</a>
       <a class="cw-link" href="<?php echo esc_url( home_url( '/racking/' ) ); ?>">Back to archive <span>&rarr;</span></a>
     </div>
   </div>

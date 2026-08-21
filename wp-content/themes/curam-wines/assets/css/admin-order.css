@@ -1,0 +1,41 @@
+/* Drag-and-drop row order in WP Admin lists */
+.wp-list-table .column-cw_order {
+  width: 2.5rem;
+  text-align: center;
+}
+
+.cw-order-handle {
+  cursor: move;
+  color: #8c8f94;
+  line-height: 1.2;
+}
+
+.cw-order-handle:hover {
+  color: #1d2327;
+}
+
+.wp-list-table tbody.cw-order-enabled tr {
+  cursor: grab;
+}
+
+.wp-list-table tbody.cw-order-enabled tr.ui-sortable-helper {
+  cursor: grabbing;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.wp-list-table tbody.cw-order-enabled tr.ui-sortable-placeholder {
+  visibility: visible !important;
+  background: #f0f6fc;
+  outline: 1px dashed #2271b1;
+}
+
+.cw-order-status {
+  display: inline-block;
+  margin-left: 0.75rem;
+  font-weight: 600;
+}
+
+.cw-order-status.is-saving { color: #996800; }
+.cw-order-status.is-saved { color: #00a32a; }
+.cw-order-status.is-error { color: #d63638; }

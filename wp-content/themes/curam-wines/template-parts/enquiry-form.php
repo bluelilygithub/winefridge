@@ -8,16 +8,16 @@ $prefill_series  = isset( $_GET['series'] ) ? sanitize_text_field( wp_unslash( $
 ?>
 <div class="cw-enquiry-form-wrap">
   <?php if ( $status === 'sent' ) : ?>
-    <div class="cw-alert cw-alert--ok" role="status">Thank you — we'll be in touch within one business day with your fixed quote.</div>
+    <div class="cw-alert cw-alert--ok" role="status">Thank you — we'll be in touch within one business day with your quote.</div>
   <?php elseif ( $status === 'error' ) : ?>
-    <div class="cw-alert cw-alert--err" role="alert">Something went wrong. Please check your details and try again, or call us on <?php echo esc_html( cw_get_org_phone() ); ?>.</div>
+    <div class="cw-alert cw-alert--err" role="alert">Something went wrong. Please check your details and try again<?php if ( cw_get_org_phone() ) : ?>, or call us on <?php echo esc_html( cw_get_org_phone() ); ?><?php endif; ?>.</div>
   <?php endif; ?>
 
   <?php if ( $prefill_product ) : ?>
     <p class="cw-enquiry-prefill">Enquiring about: <strong><?php echo esc_html( $prefill_product ); ?></strong></p>
   <?php endif; ?>
 
-  <form class="cw-form" id="cw-enquiry-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" novalidate>
+  <form class="cw-form" id="cw-enquiry-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" novalidate data-gtm-event="form_view" data-gtm-location="enquiry_page">
     <input type="hidden" name="action" value="cw_enquiry">
     <input type="hidden" name="enquiry_mode" value="quick" id="cw-enquiry-mode">
     <?php wp_nonce_field( 'cw_enquiry', 'cw_enquiry_nonce' ); ?>
@@ -78,9 +78,6 @@ $prefill_series  = isset( $_GET['series'] ) ? sanitize_text_field( wp_unslash( $
         <textarea name="message" id="cw-enquiry-message" rows="4" placeholder="Room dimensions, doorway access, target install date, display vs bulk storage…"></textarea>
       </div>
     </div>
-
-    <button type="submit" class="cw-btn">Get a fixed quote</button>
-    <p class="cw-note">We respond within one business day. No spam, ever.</p>
 
     <button type="button" class="cw-form-toggle" id="cw-form-toggle" aria-expanded="false" aria-controls="cw-form-detail">
       Add more detail (optional)
@@ -154,5 +151,8 @@ $prefill_series  = isset( $_GET['series'] ) ? sanitize_text_field( wp_unslash( $
         </div>
       </div>
     </div>
+
+    <button type="submit" class="cw-btn" id="gtm-form-submit" data-gtm-event="form_submit_click" data-gtm-location="enquiry_page">Get a quote</button>
+    <p class="cw-note">We respond within one business day. No spam, ever.</p>
   </form>
 </div>

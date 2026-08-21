@@ -72,8 +72,9 @@ add_shortcode( 'cw_shared_specs', function ( $atts ) {
 	}
 
 	if ( $atts['context'] === 'engineering' ) {
-		$specs[] = [ 'label' => 'Recovery after door open (30s)', 'value' => 'Under 90 seconds' ];
-		$specs[] = [ 'label' => 'Cooling type',                'value' => 'Compressor-based (not thermoelectric)' ];
+		foreach ( cw_get_engineering_extra_specs() as $row ) {
+			$specs[] = $row;
+		}
 	}
 
 	if ( empty( $specs ) ) {
@@ -98,6 +99,12 @@ add_shortcode( 'cw_gallery_grid', function () {
 	} );
 } );
 
+add_shortcode( 'cw_faq_list', function () {
+	return cw_shortcode_buffer( function () {
+		get_template_part( 'template-parts/faq-list' );
+	} );
+} );
+
 add_shortcode( 'cw_top_faq', function () {
 	return cw_shortcode_buffer( function () {
 		get_template_part( 'template-parts/top-faq' );
@@ -105,11 +112,22 @@ add_shortcode( 'cw_top_faq', function () {
 } );
 
 add_shortcode( 'cw_video_block', function ( $atts ) {
-	$atts = shortcode_atts( [
-		'title'   => 'See a cabinet installed',
+	$atts     = shortcode_atts( [
+		'title'   => '',
 		'intro'   => '',
-		'caption' => 'A finished unit positioned, connected, and commissioned — no building work on site.',
+		'caption' => '',
 	], $atts, 'cw_video_block' );
+	$defaults = cw_default_site_copy();
+
+	if ( $atts['title'] === '' ) {
+		$atts['title'] = cw_get_site_copy_setting( 'video_title', $defaults['video_title'] );
+	}
+	if ( $atts['intro'] === '' ) {
+		$atts['intro'] = cw_get_site_copy_setting( 'video_intro', $defaults['video_intro'] );
+	}
+	if ( $atts['caption'] === '' ) {
+		$atts['caption'] = cw_get_site_copy_setting( 'video_caption', $defaults['video_caption'] );
+	}
 
 	return cw_shortcode_buffer( function () use ( $atts ) {
 		get_template_part( 'template-parts/video-block', null, $atts );
@@ -122,10 +140,67 @@ add_shortcode( 'cw_enquiry_form', function () {
 	} );
 } );
 
+add_shortcode( 'cw_contact_form', function () {
+	return cw_shortcode_buffer( function () {
+		get_template_part( 'template-parts/contact-form' );
+	} );
+} );
+
+add_shortcode( 'cw_contact_details', function () {
+	return cw_shortcode_buffer( function () {
+		get_template_part( 'template-parts/contact-details' );
+	} );
+} );
+
+add_shortcode( 'cw_phone', function () {
+	return esc_html( cw_get_org_phone() );
+} );
+
+add_shortcode( 'cw_email', function () {
+	return esc_html( cw_get_org_email() );
+} );
+
+add_shortcode( 'cw_enquiry_contact', function () {
+	$phone = cw_get_org_phone();
+	$email = cw_get_org_email();
+	if ( $phone === '' && $email === '' ) {
+		return '';
+	}
+
+	ob_start();
+	echo '<div class="cw-enquiry-contact">';
+	if ( $phone !== '' ) {
+		printf(
+			'<a href="%s"%s>%s</a>',
+			esc_url( 'tel:' . cw_get_org_phone_tel() ),
+			cw_gtm_phone_attrs( 'enquire_sidebar', 'gtm-phone-enquire' ),
+			esc_html( $phone )
+		);
+	}
+	if ( $phone !== '' && $email !== '' ) {
+		echo '<br>';
+	}
+	if ( $email !== '' ) {
+		printf(
+			'<a href="%s"%s>%s</a>',
+			esc_url( 'mailto:' . $email ),
+			cw_gtm_email_attrs( 'enquire_sidebar', 'gtm-email-enquire' ),
+			esc_html( $email )
+		);
+	}
+	echo '</div>';
+	return ob_get_clean();
+} );
+
 add_shortcode( 'cw_home_hero', function ( $atts ) {
-	$atts = shortcode_atts( [
-		'eyebrow' => 'Walk-In Wine Cabinets Australia',
+	$atts     = shortcode_atts( [
+		'eyebrow' => '',
 	], $atts, 'cw_home_hero' );
+	$defaults = cw_default_site_copy();
+
+	if ( $atts['eyebrow'] === '' ) {
+		$atts['eyebrow'] = cw_get_site_copy_setting( 'hero_eyebrow', $defaults['hero_eyebrow'] );
+	}
 
 	return cw_shortcode_buffer( function () use ( $atts ) {
 		get_template_part( 'template-parts/home-hero', null, $atts );
@@ -143,11 +218,19 @@ add_shortcode( 'cw_featured_installation', function ( $atts ) {
 } );
 
 add_shortcode( 'cw_process_steps', function ( $atts ) {
-	$atts = shortcode_atts( [
-		'heading' => 'What is a walk-in wine cellar?',
-		'intro'   => 'A climate-controlled walk-in room, purpose-built to cellar wine long-term at a steady 12–14°C. The fit-out is yours to set — maximise bottle capacity, put the collection on display, or balance both.',
+	$atts     = shortcode_atts( [
+		'heading' => '',
+		'intro'   => '',
 		'cta'     => '',
 	], $atts, 'cw_process_steps' );
+	$defaults = cw_default_site_copy();
+
+	if ( $atts['heading'] === '' ) {
+		$atts['heading'] = cw_get_site_copy_setting( 'process_heading', $defaults['process_heading'] );
+	}
+	if ( $atts['intro'] === '' ) {
+		$atts['intro'] = cw_get_site_copy_setting( 'process_intro', $defaults['process_intro'] );
+	}
 
 	return cw_shortcode_buffer( function () use ( $atts ) {
 		get_template_part( 'template-parts/process-steps', null, $atts );
@@ -183,5 +266,7 @@ add_shortcode( 'cw_min_price', function () {
 		wp_reset_postdata();
 	}
 
-	return esc_html( $label ?: 'From $5,400 installed' );
+	$fallback = cw_get_site_copy_setting( 'min_price_fallback', 'From $5,400 installed' );
+
+	return esc_html( $label ?: $fallback );
 } );

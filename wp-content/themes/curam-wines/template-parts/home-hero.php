@@ -24,7 +24,7 @@ $sub     = $page instanceof WP_Post ? get_the_excerpt( $page ) : '';
       <p class="cw-home-hero-sub"><?php echo wp_kses_post( $sub ); ?></p>
     <?php endif; ?>
     <div class="cw-home-hero-actions">
-      <a class="cw-btn" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>">Get a fixed quote</a>
+      <a class="cw-btn" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>"<?php echo cw_gtm_quote_attrs( 'hero', 'gtm-quote-hero' ); ?>>Get a quote</a>
       <a class="cw-btn cw-btn--ghost" href="<?php echo esc_url( home_url( '/products/' ) ); ?>">See the range</a>
     </div>
   </div>

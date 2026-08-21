@@ -255,6 +255,13 @@ function cw_get_page_by_slug( $slug ) {
 	return ( $page && $page->post_status === 'publish' ) ? $page : null;
 }
 
+/** URL for post-enquiry redirect (page slug: thank-you). */
+function cw_get_enquiry_thank_you_url() {
+	$page = cw_get_page_by_slug( 'thank-you' );
+
+	return $page ? get_permalink( $page ) : home_url( '/thank-you/' );
+}
+
 function cw_render_page_hero_from_post( $post = null, $args = [] ) {
 	$post = get_post( $post );
 	if ( ! $post ) {
@@ -297,8 +304,8 @@ function cw_query_installations( $args = [] ) {
 		'post_type'      => 'case_study',
 		'posts_per_page' => -1,
 		'post_status'    => 'publish',
-		'orderby'        => 'date',
-		'order'          => 'DESC',
+		'orderby'        => 'menu_order title',
+		'order'          => 'ASC',
 	];
 
 	return new WP_Query( array_merge( $defaults, $args ) );

@@ -47,7 +47,7 @@ if ( $intro ) {
     <h2>Need help narrowing the fit-out?</h2>
     <p>Tell us how you want the cellar to behave: maximum capacity, more display, or a blend of both. We can map the rack style into the broader concept and quote.</p>
     <div class="cw-endnote-actions">
-      <a class="cw-btn" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>">Talk through your fit-out</a>
+      <a class="cw-btn" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>"<?php echo cw_gtm_quote_attrs( 'rack_archive' ); ?>>Talk through your fit-out</a>
       <a class="cw-link" href="<?php echo esc_url( home_url( '/engineering/' ) ); ?>">How it works <span>&rarr;</span></a>
     </div>
   </div>

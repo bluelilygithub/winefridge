@@ -1,5 +1,5 @@
 <?php
-define( 'CW_VERSION', '1.12.3' );
+define( 'CW_VERSION', '1.16.0' );
 
 /* -------------------------------------------------------------------------
  * Theme setup
@@ -92,7 +92,7 @@ add_action( 'init', function () {
 		'menu_icon'    => 'dashicons-archive',
 		'rewrite'      => [ 'slug' => 'range' ],
 		'show_in_rest' => true,
-		'supports'     => [ 'title', 'editor', 'excerpt', 'thumbnail' ],
+		'supports'     => [ 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ],
 	] );
 } );
 
@@ -326,11 +326,12 @@ function cw_get_gallery_items() {
 }
 
 /**
- * Flat list of gallery images and videos for the public gallery page.
+ * Flat list of gallery images and videos from Products / Installations / Racks.
+ * Used to seed the Gallery CPT; the public page prefers cw_get_gallery_slides().
  *
  * @return array<int, array<string, mixed>>
  */
-function cw_get_gallery_slides() {
+function cw_get_legacy_gallery_slides() {
 	$slides = [];
 	$fallback = get_theme_file_uri( 'assets/images/product-glass-pod.jpg' );
 
@@ -373,10 +374,11 @@ function cw_get_gallery_slides() {
 				$thumb = wp_get_attachment_image_url( $thumb_id, 'large' );
 				if ( $full ) {
 					$post_slides[] = array_merge( $base, [
-						'media' => 'image',
-						'full'  => $full,
-						'thumb' => $thumb ?: $full,
-						'alt'   => get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) ?: get_the_title( $post ),
+						'media'    => 'image',
+						'full'     => $full,
+						'thumb'    => $thumb ?: $full,
+						'image_id' => $thumb_id,
+						'alt'      => get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) ?: get_the_title( $post ),
 					] );
 				}
 			}
@@ -389,10 +391,11 @@ function cw_get_gallery_slides() {
 				}
 
 				$post_slides[] = array_merge( $base, [
-					'media' => 'image',
-					'full'  => $full,
-					'thumb' => $thumb ?: $full,
-					'alt'   => get_post_meta( $aid, '_wp_attachment_image_alt', true ) ?: get_the_title( $post ),
+					'media'    => 'image',
+					'full'     => $full,
+					'thumb'    => $thumb ?: $full,
+					'image_id' => $aid,
+					'alt'      => get_post_meta( $aid, '_wp_attachment_image_alt', true ) ?: get_the_title( $post ),
 				] );
 			}
 
@@ -401,10 +404,11 @@ function cw_get_gallery_slides() {
 				$thumb = wp_get_attachment_image_url( $thumb_id, 'large' );
 				if ( $full ) {
 					$post_slides[] = array_merge( $base, [
-						'media' => 'image',
-						'full'  => $full,
-						'thumb' => $thumb ?: $full,
-						'alt'   => get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) ?: get_the_title( $post ),
+						'media'    => 'image',
+						'full'     => $full,
+						'thumb'    => $thumb ?: $full,
+						'image_id' => $thumb_id,
+						'alt'      => get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) ?: get_the_title( $post ),
 					] );
 				}
 			}
@@ -422,6 +426,8 @@ function cw_get_gallery_slides() {
 					'media'     => 'video',
 					'full'      => $poster ?: $fallback,
 					'thumb'     => $poster ?: $fallback,
+					'image_id'  => $thumb_id ?: ( $gallery[0] ?? 0 ),
+					'video_id'  => cw_get_post_video_id( $post->ID ),
 					'video_url' => $video_url,
 					'alt'       => get_the_title( $post ) . ' video',
 				] );
@@ -557,7 +563,7 @@ add_action( 'init', function () {
 		'menu_icon'    => 'dashicons-portfolio',
 		'rewrite'      => [ 'slug' => 'installations' ],
 		'show_in_rest' => true,
-		'supports'     => [ 'title', 'editor', 'excerpt', 'thumbnail' ],
+		'supports'     => [ 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ],
 	] );
 } );
 
@@ -589,15 +595,16 @@ add_action( 'admin_post_nopriv_cw_enquiry', 'cw_handle_enquiry' );
 add_action( 'admin_post_cw_enquiry',        'cw_handle_enquiry' );
 
 function cw_handle_enquiry() {
-	$redirect = wp_get_referer() ?: home_url( '/enquire/' );
+	$error_redirect   = wp_get_referer() ?: home_url( '/enquire/' );
+	$success_redirect = cw_get_enquiry_thank_you_url();
 
 	if ( empty( $_POST['cw_enquiry_nonce'] ) || ! wp_verify_nonce( $_POST['cw_enquiry_nonce'], 'cw_enquiry' ) ) {
-		wp_safe_redirect( add_query_arg( 'enquiry', 'error', $redirect ) );
+		wp_safe_redirect( add_query_arg( 'enquiry', 'error', $error_redirect ) );
 		exit;
 	}
 
 	if ( ! empty( $_POST['cw_website'] ) ) {
-		wp_safe_redirect( add_query_arg( 'enquiry', 'sent', $redirect ) );
+		wp_safe_redirect( $success_redirect );
 		exit;
 	}
 
@@ -617,12 +624,13 @@ function cw_handle_enquiry() {
 	$message            = sanitize_textarea_field( wp_unslash( $_POST['message']        ?? '' ) );
 
 	if ( empty( $name ) || empty( $email ) || ! is_email( $email ) || empty( $phone ) ) {
-		wp_safe_redirect( add_query_arg( 'enquiry', 'error', $redirect ) );
+		wp_safe_redirect( add_query_arg( 'enquiry', 'error', $error_redirect ) );
 		exit;
 	}
 
 	$mode = sanitize_text_field( wp_unslash( $_POST['enquiry_mode'] ?? 'quick' ) );
 	$data = [
+		'form_type'         => 'quote',
 		'mode'              => $mode,
 		'name'              => $name,
 		'email'             => $email,
@@ -638,22 +646,107 @@ function cw_handle_enquiry() {
 		'property_type'     => $property_type,
 		'deadline'          => $deadline,
 		'message'           => $message,
+		'topic'             => '',
 	];
 
-	if ( ! cw_send_enquiry_notifications( $data ) ) {
-		wp_safe_redirect( add_query_arg( 'enquiry', 'error', $redirect ) );
+	// Log first so the lead is kept even if outbound mail fails.
+	$log_id      = cw_log_enquiry( $data );
+	$admin_sent  = cw_send_enquiry_admin_email( $data );
+	$customer_sent = cw_send_enquiry_customer_email( $data );
+
+	if ( $log_id ) {
+		update_post_meta( $log_id, '_cw_enquiry_mail_admin', $admin_sent ? '1' : '0' );
+		update_post_meta( $log_id, '_cw_enquiry_mail_customer', $customer_sent ? '1' : '0' );
+	}
+
+	if ( ! $admin_sent || ! $customer_sent ) {
+		wp_safe_redirect( add_query_arg( 'enquiry', 'error', $error_redirect ) );
 		exit;
 	}
 
-	wp_safe_redirect( add_query_arg( 'enquiry', 'sent', $redirect ) . '#enquire' );
+	wp_safe_redirect( $success_redirect );
+	exit;
+}
+
+/* -------------------------------------------------------------------------
+ * Contact form handler (general / less formal)
+ * ---------------------------------------------------------------------- */
+add_action( 'admin_post_nopriv_cw_contact', 'cw_handle_contact' );
+add_action( 'admin_post_cw_contact',        'cw_handle_contact' );
+
+function cw_handle_contact() {
+	$error_redirect   = wp_get_referer() ?: home_url( '/contact/' );
+	$success_redirect = cw_get_enquiry_thank_you_url();
+
+	if ( empty( $_POST['cw_contact_nonce'] ) || ! wp_verify_nonce( $_POST['cw_contact_nonce'], 'cw_contact' ) ) {
+		wp_safe_redirect( add_query_arg( 'contact', 'error', $error_redirect ) );
+		exit;
+	}
+
+	if ( ! empty( $_POST['cw_website'] ) ) {
+		wp_safe_redirect( $success_redirect );
+		exit;
+	}
+
+	$name    = sanitize_text_field( wp_unslash( $_POST['name']    ?? '' ) );
+	$email   = sanitize_email(      wp_unslash( $_POST['email']   ?? '' ) );
+	$phone   = sanitize_text_field( wp_unslash( $_POST['phone']   ?? '' ) );
+	$topic   = sanitize_text_field( wp_unslash( $_POST['topic']   ?? '' ) );
+	$message = sanitize_textarea_field( wp_unslash( $_POST['message'] ?? '' ) );
+
+	if ( empty( $name ) || empty( $email ) || ! is_email( $email ) || empty( $message ) ) {
+		wp_safe_redirect( add_query_arg( 'contact', 'error', $error_redirect ) );
+		exit;
+	}
+
+	$data = [
+		'form_type'         => 'contact',
+		'mode'              => 'contact',
+		'name'              => $name,
+		'email'             => $email,
+		'phone'             => $phone,
+		'topic'             => $topic,
+		'city'              => '',
+		'bottle_capacity'   => '',
+		'series'            => '',
+		'installation_type' => '',
+		'width'             => '',
+		'height'            => '',
+		'depth'             => '',
+		'finish'            => '',
+		'property_type'     => '',
+		'deadline'          => '',
+		'message'           => $message,
+	];
+
+	$log_id        = cw_log_enquiry( $data );
+	$admin_sent    = cw_send_contact_admin_email( $data );
+	$customer_sent = cw_send_contact_customer_email( $data );
+
+	if ( $log_id ) {
+		update_post_meta( $log_id, '_cw_enquiry_mail_admin', $admin_sent ? '1' : '0' );
+		update_post_meta( $log_id, '_cw_enquiry_mail_customer', $customer_sent ? '1' : '0' );
+	}
+
+	if ( ! $admin_sent || ! $customer_sent ) {
+		wp_safe_redirect( add_query_arg( 'contact', 'error', $error_redirect ) );
+		exit;
+	}
+
+	wp_safe_redirect( $success_redirect );
 	exit;
 }
 
 require get_template_directory() . '/inc/a11y.php';
 require get_template_directory() . '/inc/site-settings.php';
+require get_template_directory() . '/inc/site-copy.php';
 require get_template_directory() . '/inc/mail.php';
+require get_template_directory() . '/inc/enquiry-log.php';
 require get_template_directory() . '/inc/seo.php';
 require get_template_directory() . '/inc/content-helpers.php';
+require get_template_directory() . '/inc/gtm-tracking.php';
+require get_template_directory() . '/inc/content-cpts.php';
 require get_template_directory() . '/inc/shortcodes.php';
 require get_template_directory() . '/inc/admin-meta.php';
+require get_template_directory() . '/inc/admin-order.php';
 require get_template_directory() . '/inc/admin-pages.php';

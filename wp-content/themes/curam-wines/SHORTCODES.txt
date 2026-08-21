@@ -47,11 +47,12 @@ SHORTCODES
 
 [cw_home_hero]
   Homepage hero only. Uses the front page Title, Excerpt, and Featured
-  image. Includes "Get a fixed quote" and "See the range" buttons.
+  image. Includes "Get a quote" and "See the range" buttons.
 
   Optional attribute:
     eyebrow="Walk-In Wine Cabinets Australia"
-      Small label above the headline.
+      Small label above the headline. Default comes from
+      Settings → Site copy. Shortcode attribute overrides that.
 
   Example:
     [cw_home_hero]
@@ -59,8 +60,8 @@ SHORTCODES
 
 
 [cw_trust_strip]
-  Full-width dark trust bar: lowest product price, warranty, delivery,
-  lead time, Australian-made. Price is pulled automatically from Products.
+  Full-width dark trust bar. Lines are edited under Settings → Site copy
+  (one per line, "Bold lead | rest of the line").
 
   Optional attribute:
     compact="1"   Smaller inline version for sidebar use (Enquire page).
@@ -74,6 +75,7 @@ SHORTCODES
   "Which configuration fits your space?" — links each buyer situation
   (apartment, house, garage, etc.) to the recommended product.
 
+  Heading/intro: Settings → Site copy.
   Data source: Products (first product matching each situation checkbox).
   Edit product names, excerpts, and situation checkboxes under Products.
 
@@ -133,24 +135,34 @@ SHORTCODES
 
 
 [cw_gallery_grid]
-  Photo and video gallery with filter chips (Products / Installations /
-  Videos) and click-to-open lightbox with prev/next navigation.
+  Photo and video gallery with filter chips from Gallery categories
+  and click-to-open lightbox with prev/next navigation.
 
-  Data source: Products and Installations that have gallery media and
-  "Show on Gallery page" ticked in admin.
+  Data source: WP Admin → Gallery. Each item needs a featured image
+  and at least one Gallery category. Optional video plays in the lightbox.
+
+  Used on: /gallery/
 
 
 [cw_top_faq]
-  "Common questions" accordion strip (five buyer FAQs with links).
+  "Common questions" accordion strip on the homepage.
 
-  Content is theme-defined (template-parts/top-faq.php). Edit that file
-  to change questions, or replace with your own HTML on the page.
+  Data source: WP Admin → FAQs assigned to the "Home page" category.
+  Title = question, editor = answer.
+
+
+[cw_faq_list]
+  Full FAQ page list, grouped by FAQ category (Buying, Pricing, etc.).
+  The FAQ page template also renders this automatically.
+
+  Data source: WP Admin → FAQs. Skip the "Home page" category when grouping.
 
 
 [cw_video_block]
   Featured video player. Uses the site video from the media library
   (converted.mp4 / ID stored in site settings). First video found is
-  cached automatically.
+  cached automatically. Title, intro, caption, and poster default to
+  Settings → Site copy. Shortcode attributes override those.
 
   Optional attributes:
     title="See how installation works"
@@ -158,6 +170,7 @@ SHORTCODES
     caption="Caption below the video."
 
   Example:
+    [cw_video_block]
     [cw_video_block title="See how installation works" intro="A finished cabinet delivered to site." caption="Install footage."]
 
 
@@ -176,9 +189,13 @@ SHORTCODES
 
 
 [cw_process_steps]
-  Walk-in wine cellar definition + seven-step process diagram and detail
-  list (consultation → supply & install). Self-contained dark section —
-  paste the shortcode on its own line (do not wrap in another cw-sec).
+  Walk-in wine cellar definition + process diagram and detail list.
+  Self-contained dark section — paste the shortcode on its own line
+  (do not wrap in another cw-sec).
+
+  Steps: WP Admin → Process (title + excerpt, drag to reorder).
+  Heading, intro, caption, illustration: Settings → Site copy.
+  Shortcode attributes still override heading/intro if set.
 
   Optional attributes:
     heading="What is a walk-in wine cellar?"
@@ -197,13 +214,23 @@ SHORTCODES
 
 [cw_enquiry_form]
   Full quote request form (quick fields + optional detail toggle).
-  Posts to the theme enquiry handler. Use on the Enquire page inside the
-  right column of the cw-enquiry layout.
+  Posts to the theme enquiry handler. Use on the Enquire page in the
+  single-column cw-enquiry layout (intro content, then the form).
+
+
+[cw_contact_details]
+  Phone and email from Settings, plus a note linking to the quote form.
+
+
+[cw_contact_form]
+  Short general contact form (name, email, optional phone, topic, message).
+  Less formal than [cw_enquiry_form]. Redirects to /thank-you/. Logged in
+  Enquiry log as Type = Contact.
 
 
 [cw_min_price]
   Inline text only — outputs the lowest installed price from all products,
-  e.g. "From $5,400 installed". Use inside a sentence in the page editor.
+  e.g. "From $5,400 installed". Fallback text is Settings → Site copy.
 
   Example:
     Self-contained units from [cw_min_price]. No builder required.
@@ -225,6 +252,14 @@ Installations (/installations/…)
 Pages (copy + shortcode placement)
   WP Admin → Pages
 
+Process steps ([cw_process_steps])
+  WP Admin → Process
+  Title = step name, Excerpt = short description. Drag to reorder.
+  Heading/intro/caption: Settings → Site copy.
+
+One-off site copy (trust strip, hero eyebrow, video, fit-guide headings)
+  WP Admin → Settings → Site copy
+
 
 TYPICAL PAGE SHORTCODES
 =======================
@@ -232,11 +267,11 @@ TYPICAL PAGE SHORTCODES
 Home (/)
   [cw_home_hero]
   [cw_trust_strip]
+  [cw_process_steps]          ← walk-in definition + 7-step process
   [cw_video_block]
   [cw_series_cards]
   [cw_shared_specs]
   [cw_featured_installation]
-  [cw_process_steps]          ← walk-in definition + 7-step process
   [cw_top_faq]
 
 The Range (/products/)
@@ -262,16 +297,29 @@ Gallery (/gallery/)
   [cw_gallery_grid]
 
 Enquire (/enquire/)
+  [cw_enquiry_contact]          (phone + email from Settings)
   [cw_enquiry_form]
   [cw_trust_strip compact="1"]   (in sidebar intro column)
+
+Contact (/contact/)
+  Single-column layout with contact details + a short general message form.
+  Redirects to /thank-you/ (same as the quote form). Logged in Enquiry log as Type = Contact.
+
+  Example page body:
+    <section class="cw-sec">
+      <div class="cw-wrap cw-enquiry">
+        [cw_contact_details]
+        [cw_contact_form]
+      </div>
+    </section>
 
 Installations archive (/installations/)
   Edit page: Installations (slug installations-intro)
   [cw_installations_grid]
 
 FAQ (/faq/)
-  FAQ content is HTML in the page editor (details/summary elements).
-  No shortcodes required unless you add [cw_top_faq] elsewhere.
+  Questions: WP Admin → FAQs (categories group the page).
+  Page editor: intro copy only (title / excerpt / featured image for the hero).
 
 
 NOTES

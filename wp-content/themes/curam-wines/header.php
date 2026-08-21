@@ -6,6 +6,7 @@
   <link rel="icon" type="image/png" sizes="64x64" href="<?php echo get_theme_file_uri('assets/images/favicon-64.png'); ?>">
   <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_theme_file_uri('assets/images/favicon-32.png'); ?>">
   <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_theme_file_uri('assets/images/favicon-180.png'); ?>">
+  <?php cw_output_analytics_head(); ?>
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -30,11 +31,14 @@
         <li><a href="<?php echo esc_url( get_post_type_archive_link( 'rack' ) ?: home_url( '/racking/' ) ); ?>"<?php echo cw_nav_link_attrs( 'racking' ); ?>>Racking</a></li>
         <li><a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>"<?php echo cw_nav_link_attrs( 'gallery' ); ?>>Gallery</a></li>
         <li><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>"<?php echo cw_nav_link_attrs( 'faq' ); ?>>FAQ</a></li>
+        <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"<?php echo cw_nav_link_attrs( 'contact' ); ?>>Contact</a></li>
       </ul>
     </nav>
     <div class="cw-header-cta">
-      <a class="cw-header-phone" href="tel:<?php echo esc_attr( cw_get_org_phone_tel() ); ?>" aria-label="<?php echo esc_attr( 'Call ' . cw_get_org_phone() ); ?>"><?php echo esc_html( cw_get_org_phone() ); ?></a>
-      <a class="cw-btn cw-btn--ghost" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>">Get a fixed quote</a>
+      <?php if ( cw_get_org_phone() ) : ?>
+        <a class="cw-header-phone" href="tel:<?php echo esc_attr( cw_get_org_phone_tel() ); ?>" aria-label="<?php echo esc_attr( 'Call ' . cw_get_org_phone() ); ?>"<?php echo cw_gtm_phone_attrs( 'header', 'gtm-phone-header' ); ?>><?php echo esc_html( cw_get_org_phone() ); ?></a>
+      <?php endif; ?>
+      <a class="cw-btn cw-btn--ghost" href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>"<?php echo cw_gtm_quote_attrs( 'header', 'gtm-quote-header' ); ?>>Get a quote</a>
       <button type="button" class="cw-burger" aria-label="Open menu" aria-expanded="false" aria-controls="cw-primary-nav">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>

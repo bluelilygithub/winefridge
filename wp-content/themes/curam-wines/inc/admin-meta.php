@@ -46,7 +46,7 @@ add_action( 'init', function () {
 		'sanitize_callback' => 'cw_sanitize_situation_array',
 	] );
 
-	foreach ( [ 'product', 'case_study', 'rack' ] as $post_type ) {
+	foreach ( [ 'product', 'case_study', 'rack', 'cw_gallery' ] as $post_type ) {
 		register_post_meta( $post_type, '_cw_video_id', [
 			'type'              => 'integer',
 			'single'            => true,
@@ -105,7 +105,7 @@ function cw_sanitize_gallery_ids( $value ) {
  * Meta boxes — classic editor for easier non-technical editing
  * ---------------------------------------------------------------------- */
 add_filter( 'use_block_editor_for_post_type', function ( $use, $post_type ) {
-	if ( in_array( $post_type, [ 'product', 'case_study', 'rack', 'page' ], true ) ) {
+	if ( in_array( $post_type, [ 'product', 'case_study', 'rack', 'page', 'cw_faq', 'cw_gallery', 'cw_process' ], true ) ) {
 		return false;
 	}
 	return $use;
@@ -165,6 +165,15 @@ add_action( 'add_meta_boxes', function () {
 		'normal',
 		'high'
 	);
+
+	add_meta_box(
+		'cw_gallery_media',
+		'Video (optional)',
+		'cw_render_gallery_item_meta_box',
+		'cw_gallery',
+		'normal',
+		'high'
+	);
 }, 10 );
 
 add_action( 'admin_notices', function () {
@@ -172,7 +181,22 @@ add_action( 'admin_notices', function () {
 	if ( ! $screen || ! in_array( $screen->base, [ 'post', 'post-new' ], true ) ) {
 		return;
 	}
-	if ( ! in_array( $screen->post_type, [ 'product', 'case_study', 'rack' ], true ) ) {
+	if ( ! in_array( $screen->post_type, [ 'product', 'case_study', 'rack', 'cw_faq', 'cw_gallery', 'cw_process' ], true ) ) {
+		return;
+	}
+
+	if ( $screen->post_type === 'cw_process' ) {
+		echo '<div class="notice notice-info"><p><strong>Editing a process step:</strong> The <strong>title</strong> is the step name. The <strong>excerpt</strong> is the short description shown on the site. Drag steps on the Process list to change order. Heading, intro, and caption are under <strong>Settings → Site copy</strong>.</p></div>';
+		return;
+	}
+
+	if ( $screen->post_type === 'cw_faq' ) {
+		echo '<div class="notice notice-info"><p><strong>Editing an FAQ:</strong> The <strong>title</strong> is the question. The editor is the answer. Assign a <strong>category</strong> in the sidebar — those groups appear on the FAQ page. Assign <strong>Home page</strong> as well to show it in the homepage strip.</p></div>';
+		return;
+	}
+
+	if ( $screen->post_type === 'cw_gallery' ) {
+		echo '<div class="notice notice-info"><p><strong>Editing a gallery item:</strong> Set the <strong>featured image</strong> in the sidebar. Assign a <strong>Gallery category</strong> — those names become the filter buttons on the Gallery page. Add a video only if this tile should play in the lightbox.</p></div>';
 		return;
 	}
 
@@ -334,12 +358,30 @@ function cw_render_media_meta_box( $post ) {
 	echo '</div>';
 }
 
+function cw_render_gallery_item_meta_box( $post ) {
+	wp_nonce_field( 'cw_save_gallery_item_meta', 'cw_gallery_item_meta_nonce' );
+
+	$video_id  = (int) get_post_meta( $post->ID, '_cw_video_id', true );
+	$video_url = $video_id ? wp_get_attachment_url( $video_id ) : '';
+
+	echo '<p class="description">Optional. If set, this tile plays as video on the Gallery page. The featured image is used as the poster frame.</p>';
+	echo '<input type="hidden" id="cw_video_id" name="_cw_video_id" value="' . esc_attr( $video_id ) . '">';
+	echo '<div id="cw-video-preview" class="cw-admin-preview">';
+	if ( $video_url ) {
+		echo '<video src="' . esc_url( $video_url ) . '" controls style="max-width:100%;max-height:200px;"></video>';
+	}
+	echo '</div>';
+	echo '<p><button type="button" class="button" id="cw-video-select">Select / upload video</button> ';
+	echo '<button type="button" class="button" id="cw-video-remove"' . ( $video_id ? '' : ' style="display:none;"' ) . '>Remove video</button></p>';
+}
+
 /* -------------------------------------------------------------------------
  * Save handlers
  * ---------------------------------------------------------------------- */
 add_action( 'save_post_product', 'cw_save_product_meta' );
 add_action( 'save_post_case_study', 'cw_save_installation_meta' );
 add_action( 'save_post_rack', 'cw_save_rack_meta' );
+add_action( 'save_post_cw_gallery', 'cw_save_gallery_item_meta' );
 
 function cw_save_product_meta( $post_id ) {
 	if ( ! isset( $_POST['cw_product_meta_nonce'] ) || ! wp_verify_nonce( $_POST['cw_product_meta_nonce'], 'cw_save_product_meta' ) ) {
@@ -411,6 +453,20 @@ function cw_save_rack_meta( $post_id ) {
 	cw_save_shared_media_meta( $post_id );
 }
 
+function cw_save_gallery_item_meta( $post_id ) {
+	if ( ! isset( $_POST['cw_gallery_item_meta_nonce'] ) || ! wp_verify_nonce( $_POST['cw_gallery_item_meta_nonce'], 'cw_save_gallery_item_meta' ) ) {
+		return;
+	}
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	update_post_meta( $post_id, '_cw_video_id', absint( $_POST['_cw_video_id'] ?? 0 ) );
+}
+
 function cw_save_shared_media_meta( $post_id ) {
 	$video_id = absint( $_POST['_cw_video_id'] ?? 0 );
 	update_post_meta( $post_id, '_cw_video_id', $video_id );
@@ -432,7 +488,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 	}
 
 	$screen = get_current_screen();
-	if ( ! $screen || ! in_array( $screen->post_type, [ 'product', 'case_study', 'rack' ], true ) ) {
+	if ( ! $screen || ! in_array( $screen->post_type, [ 'product', 'case_study', 'rack', 'cw_gallery' ], true ) ) {
 		return;
 	}
 
@@ -514,4 +570,51 @@ add_action( 'manage_rack_posts_custom_column', function ( $col, $post_id ) {
 	if ( $col === 'cw_rack_style' ) {
 		echo esc_html( get_post_meta( $post_id, '_rack_style', true ) ?: '—' );
 	}
+}, 10, 2 );
+
+add_filter( 'enter_title_here', function ( $title, $post ) {
+	if ( $post->post_type === 'cw_faq' ) {
+		return 'Add the question';
+	}
+	if ( $post->post_type === 'cw_gallery' ) {
+		return 'Add a short title for this photo or video';
+	}
+	return $title;
+}, 10, 2 );
+
+add_filter( 'manage_cw_gallery_posts_columns', function ( $cols ) {
+	$new = [];
+	foreach ( $cols as $key => $label ) {
+		if ( $key === 'title' ) {
+			$new['cw_thumb'] = 'Image';
+		}
+		$new[ $key ] = $label;
+	}
+	return $new;
+} );
+
+add_action( 'manage_cw_gallery_posts_custom_column', function ( $col, $post_id ) {
+	if ( $col !== 'cw_thumb' ) {
+		return;
+	}
+	$thumb = get_the_post_thumbnail( $post_id, [ 48, 48 ] );
+	echo $thumb ? $thumb : '—';
+}, 10, 2 );
+
+add_filter( 'manage_cw_faq_posts_columns', function ( $cols ) {
+	$new = [];
+	foreach ( $cols as $key => $label ) {
+		$new[ $key ] = $label;
+		if ( $key === 'title' ) {
+			$new['cw_home'] = 'Home strip';
+		}
+	}
+	return $new;
+} );
+
+add_action( 'manage_cw_faq_posts_custom_column', function ( $col, $post_id ) {
+	if ( $col !== 'cw_home' ) {
+		return;
+	}
+	echo has_term( 'home', 'faq_category', $post_id ) ? 'Yes' : '—';
 }, 10, 2 );

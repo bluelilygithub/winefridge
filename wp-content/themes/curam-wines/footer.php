@@ -30,14 +30,20 @@
           <li><a href="<?php echo esc_url( get_post_type_archive_link( 'rack' ) ?: home_url( '/racking/' ) ); ?>">Racking</a></li>
           <li><a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a></li>
           <li><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>">FAQ</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
         </ul>
       </nav>
       <nav aria-label="Contact">
         <h5>Contact</h5>
         <ul>
-          <li><a href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>">Get a fixed quote</a></li>
-          <li><a href="tel:<?php echo esc_attr( cw_get_org_phone_tel() ); ?>" aria-label="<?php echo esc_attr( 'Call ' . cw_get_org_phone() ); ?>"><?php echo esc_html( cw_get_org_phone() ); ?></a></li>
-          <li><a href="mailto:<?php echo esc_attr( cw_get_site_setting( 'org_email' ) ); ?>"><?php echo esc_html( cw_get_site_setting( 'org_email' ) ); ?></a></li>
+          <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>"<?php echo cw_gtm_quote_attrs( 'footer', 'gtm-quote-footer' ); ?>>Get a quote</a></li>
+          <?php if ( cw_get_org_phone() ) : ?>
+            <li><a href="tel:<?php echo esc_attr( cw_get_org_phone_tel() ); ?>" aria-label="<?php echo esc_attr( 'Call ' . cw_get_org_phone() ); ?>"<?php echo cw_gtm_phone_attrs( 'footer', 'gtm-phone-footer' ); ?>><?php echo esc_html( cw_get_org_phone() ); ?></a></li>
+          <?php endif; ?>
+          <?php if ( cw_get_org_email() ) : ?>
+            <li><a href="mailto:<?php echo esc_attr( cw_get_org_email() ); ?>"<?php echo cw_gtm_email_attrs( 'footer', 'gtm-email-footer' ); ?>><?php echo esc_html( cw_get_org_email() ); ?></a></li>
+          <?php endif; ?>
         </ul>
       </nav>
     </div>

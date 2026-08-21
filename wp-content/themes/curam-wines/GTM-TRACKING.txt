@@ -1,0 +1,108 @@
+Google Tag Manager — conversion tracking
+==========================================
+
+The theme marks key interactions with data-gtm-event attributes and unique IDs.
+Use ONE click trigger per event type in GTM (not one tag per button).
+
+CLICK TRIGGERS (All Elements / Click ID or Click — All Elements + filter)
+---------------------------------------------------------------------------
+
+Quote / enquiry CTAs — one trigger for all "Get a quote" style links
+  CSS selector:  [data-gtm-event="quote_click"]
+  Or use Click ID if you prefer individual elements (see IDs below).
+
+  Prominent unique IDs:
+    gtm-quote-header   — header "Get a quote"
+    gtm-quote-footer   — footer "Get a quote"
+    gtm-quote-mobile   — mobile sticky bar
+    gtm-quote-hero     — homepage hero
+    gtm-form-submit    — enquiry form submit button
+
+  All quote links also carry data-gtm-location (header, footer, hero, product_sidebar, etc.)
+  so you can segment in GA4 without separate tags.
+
+Phone clicks — one trigger for all tel: links you care about
+  CSS selector:  [data-gtm-event="phone_click"]
+
+  Prominent unique IDs:
+    gtm-phone-header   — header phone number
+    gtm-phone-footer   — footer phone number
+    gtm-phone-mobile   — mobile sticky bar phone
+
+Email clicks
+  CSS selector:  [data-gtm-event="email_click"]
+  ID: gtm-email-footer (footer), gtm-email-enquire (enquire page sidebar via shortcode)
+
+Form submit button click (optional — fires before redirect)
+  ID: gtm-form-submit
+  data-gtm-event="form_submit_click"
+
+
+PAGE / CONVERSION TRIGGERS (Custom Event or Page View)
+------------------------------------------------------
+
+Enquiry form opened
+  Custom Event:  cw_form_view
+  Or Page View where Page Path contains /enquire/
+  Or body class: .cw-gtm-page-enquire
+
+Form submitted (primary conversion — use this for Google Ads)
+  Custom Event:  cw_form_submit   ← fires on /thank-you/ page load
+  Or Page View where Page Path contains /thank-you/
+  Or body class: .cw-gtm-page-thank-you
+
+  Map cw_form_submit to:
+    GA4 event: generate_lead
+    Google Ads conversion: your "Quote request" conversion action
+
+
+RECOMMENDED GA4 / ADS EVENT MAPPING
+-----------------------------------
+
+In GTM, map theme events to GA4 recommended events:
+
+  quote_click        →  select_promotion  (or custom quote_click)
+  phone_click        →  contact
+  email_click        →  contact
+  cw_form_view       →  custom form_start (top of funnel)
+  cw_form_submit     →  generate_lead     (primary conversion)
+
+
+OTHER CONVERSIONS WORTH TRACKING
+--------------------------------
+
+Already in the theme or easy to add in GTM:
+
+  Product interest
+    Page views on /products/ and single product pages (/range/…)
+    quote_click where data-gtm-location=product_sidebar or product_endnote
+
+  High-intent content
+    Page views: /engineering/, /installations/, single installation pages
+    Video play on homepage (HTML5 video — needs GTM video trigger on .cw-video)
+
+  Brochure / engagement
+    If you add PDF download links later, use data-gtm-event="brochure_download"
+
+  Outbound / secondary
+    Footer email click (gtm-email-footer)
+    "See the range" from homepage hero → view_item_list on /products/
+
+For Google Ads bidding, prioritise in this order:
+  1. cw_form_submit (thank-you page) — primary lead conversion
+  2. phone_click — call conversion (import from GA4 or Ads call extension)
+  3. quote_click — micro-conversion / remarketing audience
+  4. cw_form_view — form abandonment remarketing
+
+
+GTM TAG CHECKLIST
+-----------------
+
+  [ ] GA4 Configuration tag (Measurement ID G-…)
+  [ ] Google Ads Conversion Linker
+  [ ] Click — All Elements trigger → quote_click → GA4 event
+  [ ] Click — All Elements trigger → phone_click → GA4 contact
+  [ ] Custom Event cw_form_submit → GA4 generate_lead + Google Ads conversion
+  [ ] Custom Event cw_form_view → GA4 form_start (optional)
+
+Test with GTM Preview mode and GA4 DebugView before publishing.

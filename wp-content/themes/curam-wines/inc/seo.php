@@ -312,14 +312,13 @@ add_action( 'wp_head', function () {
 		return;
 	}
 
-	$settings = cw_get_site_settings();
 	$schema   = [
 		'@context'    => 'https://schema.org',
 		'@type'       => 'LocalBusiness',
 		'name'        => CW_SEO_BRAND,
 		'url'         => home_url( '/' ),
-		'telephone'   => $settings['org_phone'] ?? '',
-		'email'       => $settings['org_email'] ?? '',
+		'telephone'   => cw_get_org_phone(),
+		'email'       => cw_get_org_email(),
 		'areaServed'  => 'AU',
 		'description' => cw_get_site_setting( 'default_meta_description' ),
 	];

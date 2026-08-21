@@ -2,11 +2,28 @@
 /**
  * Situation → recommended product (from Products CPT).
  */
-$guides = cw_get_fit_guides();
+$guides   = cw_get_fit_guides();
+$defaults = function_exists( 'cw_default_site_copy' ) ? cw_default_site_copy() : [];
+$heading  = function_exists( 'cw_get_site_copy_setting' )
+	? cw_get_site_copy_setting( 'fit_guide_heading', $defaults['fit_guide_heading'] ?? 'Which configuration fits your space?' )
+	: 'Which configuration fits your space?';
+$intro    = function_exists( 'cw_get_site_copy_setting' )
+	? cw_get_site_copy_setting( 'fit_guide_intro', $defaults['fit_guide_intro'] ?? '' )
+	: '';
+$enquire  = home_url( '/enquire/' );
+$intro_html = $intro !== '' ? preg_replace(
+	'/get a quote/i',
+	'<a href="' . esc_url( $enquire ) . '">$0</a>',
+	esc_html( $intro )
+) : '';
 ?>
 <div class="cw-fit-guide">
-  <h2 class="cw-fit-guide-title">Which configuration fits your space?</h2>
-  <p class="cw-fit-guide-intro">Start with your situation — not our internal series names. Each links to the full specification, or <a href="<?php echo esc_url( home_url( '/enquire/' ) ); ?>">get a fixed quote</a> and we'll confirm.</p>
+  <?php if ( $heading ) : ?>
+  <h2 class="cw-fit-guide-title"><?php echo esc_html( $heading ); ?></h2>
+  <?php endif; ?>
+  <?php if ( $intro_html ) : ?>
+  <p class="cw-fit-guide-intro"><?php echo wp_kses_post( $intro_html ); ?></p>
+  <?php endif; ?>
   <?php if ( empty( $guides ) ) : ?>
     <p class="cw-empty">Add products in WP Admin and tick suitable situations to populate this guide.</p>
   <?php else : ?>
