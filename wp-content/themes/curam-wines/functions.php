@@ -1,5 +1,5 @@
 <?php
-define( 'CW_VERSION', '1.16.0' );
+define( 'CW_VERSION', '1.16.2' );
 
 /* -------------------------------------------------------------------------
  * Theme setup
@@ -742,6 +742,7 @@ require get_template_directory() . '/inc/site-settings.php';
 require get_template_directory() . '/inc/site-copy.php';
 require get_template_directory() . '/inc/mail.php';
 require get_template_directory() . '/inc/enquiry-log.php';
+require get_template_directory() . '/inc/page-layouts.php';
 require get_template_directory() . '/inc/seo.php';
 require get_template_directory() . '/inc/content-helpers.php';
 require get_template_directory() . '/inc/gtm-tracking.php';

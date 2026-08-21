@@ -432,7 +432,8 @@ a { color: inherit; }
 .cw-enquiry-intro p { color: var(--text-soft); font-size: var(--fs-lead); margin-bottom: 1.5rem; }
 .cw-enquiry-contact { font-size: var(--fs-sm); color: var(--text-soft); line-height: 2; }
 .cw-enquiry-contact a { color: var(--accent); text-decoration: none; }
-.cw-contact-details { margin-bottom: 0.5rem; }
+.cw-contact-editor-intro { margin-bottom: 1.5rem; color: var(--text-soft); }
+.cw-contact-editor-intro > *:last-child { margin-bottom: 0; }
 .cw-contact-details-lead { color: var(--text-soft); font-size: var(--fs-lead); margin: 0 0 1.25rem; line-height: 1.7; }
 .cw-contact-details-list { list-style: none; margin: 0 0 1.5rem; padding: 0; }
 .cw-contact-details-list li { margin: 0 0 0.85rem; line-height: 1.5; }
